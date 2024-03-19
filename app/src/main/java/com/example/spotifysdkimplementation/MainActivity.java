@@ -13,11 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
@@ -26,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,14 +53,46 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tokenTextView, codeTextView, profileTextView;
     private FirebaseAuth mAuth;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+//        // for now, hard coded
+        String email = "advaybalak@gmail.com";
+        String password = "spotifywrapped";
+
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this, task -> {
+//                    if (task.isSuccessful()) {
+//                        // Sign in success, update UI with the signed-in user's information
+//                        Log.d(TAG, "createUserWithEmail:success");
+//                        FirebaseUser user = mAuth.getCurrentUser();
+//                    } else {
+//                        // If sign in fails, display a message to the user.
+//                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+//                        Toast.makeText(MainActivity.this, "Authentication failed.",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success");
+                    Toast.makeText(MainActivity.this, "User Signed In",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
 
     }
 
@@ -128,21 +166,24 @@ public class MainActivity extends AppCompatActivity {
         // Check which request code is present (if any)
         if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
             mAccessToken = response.getAccessToken();
-            setTextAsync(mAccessToken, tokenTextView);
+            System.out.println("access token: " + mAccessToken);
+            FirebaseUser currentUser = mAuth.getCurrentUser();
 
-            mAuth.signInWithCustomToken(mAccessToken)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCustomToken:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCustomToken:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            // creating a user entry
+            Map<String, Object> user = new HashMap<>();
+            assert currentUser != null;
+            user.put("email", currentUser.getEmail());
+            user.put("api token", mAccessToken);
+            user.put("user_id", currentUser.getUid());
+
+            db.collection("users")
+                    .add(user)
+                    .addOnSuccessListener(
+                            documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: "
+                                    + documentReference.getId()))
+                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+
+            setTextAsync(mAccessToken, tokenTextView);
 
 
         } else if (AUTH_CODE_REQUEST_CODE == requestCode) {
