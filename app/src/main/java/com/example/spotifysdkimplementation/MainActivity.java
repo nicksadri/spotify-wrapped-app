@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-//        // for now, hard coded
+//        // for now, hard coded. TODO: UI for sign up and logging in
         String email = "advaybalak@gmail.com";
         String password = "spotifywrapped";
 
