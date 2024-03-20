@@ -41,7 +41,19 @@
             android:text="Request Code" />
 
         <TextView
-            android:id="@+id/response_text_view"
+            android:id="@+id/profile_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            tools:text="Line 1\nLine 2\nLine 3" />
+        <TextView
+            android:id="@+id/top_artist_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            tools:text="Line 1\nLine 2\nLine 3" />
+        <TextView
+            android:id="@+id/top_track_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10sp"
@@ -58,7 +70,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="Get User Profile" />
+                android:text="Get Spotify Data" />
         </LinearLayout>
 
     </LinearLayout>
