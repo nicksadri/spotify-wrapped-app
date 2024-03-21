@@ -40,6 +40,37 @@
             android:layout_margin="8dp"
             android:text="Request Code" />
 
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/profile_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="Get Spotify User Data" />
+            <Button
+                android:id="@+id/top_artist_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="Get Top Artist Data" />
+            <Button
+                android:id="@+id/top_track_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="Get Top Artist Data" />
+        </LinearLayout>
         <TextView
             android:id="@+id/profile_text_view"
             android:layout_width="match_parent"
@@ -58,20 +89,6 @@
             android:layout_height="wrap_content"
             android:textSize="10sp"
             tools:text="Line 1\nLine 2\nLine 3" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:id="@+id/profile_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:text="Get Spotify Data" />
-        </LinearLayout>
 
     </LinearLayout>
 

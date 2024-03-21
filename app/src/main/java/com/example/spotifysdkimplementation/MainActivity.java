@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         Button tokenBtn = (Button) findViewById(R.id.token_btn);
         Button codeBtn = (Button) findViewById(R.id.code_btn);
         Button profileBtn = (Button) findViewById(R.id.profile_btn);
+        Button topArtistButton = (Button) findViewById(R.id.top_artist_btn);
+        Button topTrackButton = (Button) findViewById(R.id.top_track_btn);
 
         // Set the click listeners for the buttons
 
@@ -125,6 +127,14 @@ public class MainActivity extends AppCompatActivity {
 
         profileBtn.setOnClickListener((v) -> {
             onGetUserDataClicked();
+        });
+
+        topArtistButton.setOnClickListener((v) -> {
+            onGetTopArtistDataClicked();
+        });
+
+        topTrackButton.setOnClickListener((v) -> {
+            onGetTopTrackDataClicked();
         });
 
         mAuth = FirebaseAuth.getInstance();
@@ -197,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Get user data clicked
      * This method will get the user data using the token
-     * Data includes profile data, top artist data, and top track data
+     * Data includes the user's profile data
      */
     public void onGetUserDataClicked() {
         if (mAccessToken == null) {
@@ -212,17 +222,9 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
 
-        final Request topArtistRequest = new Request.Builder()
-                //replace id for testing
-                .url("https://api.spotify.com/v1/me/top/artists")
-                .addHeader("Authorization", "Bearer " + mAccessToken)
-                .build();
 
-        final Request topTrackRequest = new Request.Builder()
-                //replace playlist_id for testing
-                .url("https://api.spotify.com/v1/me/top/tracks")
-                .addHeader("Authorization", "Bearer " + mAccessToken)
-                .build();
+
+
 
         cancelCall();
         mCall = mOkHttpClient.newCall(profileRequest);
@@ -248,6 +250,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+    }
+
+    /**
+     * Get top artist data for specific user
+     */
+    public void onGetTopArtistDataClicked() {
+        if (mAccessToken == null) {
+            Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final Request topArtistRequest = new Request.Builder()
+                //replace id for testing
+                .url("https://api.spotify.com/v1/me/top/artists")
+                .addHeader("Authorization", "Bearer " + mAccessToken)
+                .build();
         cancelCall();
         mCall = mOkHttpClient.newCall(topArtistRequest);
         mCall.enqueue(new Callback() {
@@ -262,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     final JSONObject jsonObject = new JSONObject(response.body().string());
-                    setTextAsync(jsonObject.toString(3), topArtistsTextView);
+                    setTextAsync(jsonObject.toString(3), profileTextView);
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top artists data: " + e);
                     Toast.makeText(MainActivity.this, "Failed to parse top artists data, watch Logcat for more details",
@@ -271,6 +292,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * Get top track data for specific user
+     */
+
+    public void onGetTopTrackDataClicked() {
+        if (mAccessToken == null) {
+            Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final Request topTrackRequest = new Request.Builder()
+                //replace playlist_id for testing
+                .url("https://api.spotify.com/v1/me/top/tracks")
+                .addHeader("Authorization", "Bearer " + mAccessToken)
+                .build();
         cancelCall();
         // Request for top tracks
         mCall = mOkHttpClient.newCall(topTrackRequest);
@@ -286,8 +323,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     final JSONObject jsonObject = new JSONObject(response.body().string());
-                    System.out.println("What!!");
-                    setTextAsync(jsonObject.toString(3), topTracksTextView);
+                    setTextAsync(jsonObject.toString(3), profileTextView);
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top tracks data: " + e);
                     Toast.makeText(MainActivity.this, "Failed to parse top tracks data, watch Logcat for more details",
@@ -296,7 +332,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
     /**
      * Creates a UI thread to update a TextView in the background
@@ -318,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     private AuthorizationRequest getAuthenticationRequest(AuthorizationResponse.Type type) {
         return new AuthorizationRequest.Builder(CLIENT_ID, type, getRedirectUri().toString())
                 .setShowDialog(false)
-                .setScopes(new String[] { "user-read-email" }) // <--- Change the scope of your requested token here
+                .setScopes(new String[] { "user-read-email", "user-top-read" }) // <--- Change the scope of your requested token here
                 .setCampaign("your-campaign-token")
                 .build();
     }
