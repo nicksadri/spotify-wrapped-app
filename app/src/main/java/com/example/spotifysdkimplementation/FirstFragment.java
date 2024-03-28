@@ -12,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.spotifysdkimplementation.databinding.FragmentFirstBinding;
 
 public class FirstFragment extends Fragment {
-    asbnujolicnujloqXSWDNHUJOLQwdnuiq   wdnhujoiqwdujiknqwdujiknqwdnujik
     private FragmentFirstBinding binding;
 
     @Override
