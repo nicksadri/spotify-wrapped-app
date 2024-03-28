@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.spotifysdkimplementation.databinding.LoginPageBinding;
+import com.example.spotifysdkimplementation.databinding.FragmentFirstBinding;
 
-public class LoginPage extends Fragment {
-
-    private LoginPageBinding binding;
+public class FirstFragment extends Fragment {
+    private FragmentFirstBinding binding;
 
     @Override
     public View onCreateView(
@@ -20,7 +20,7 @@ public class LoginPage extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = LoginPageBinding.inflate(inflater, container, false);
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -28,13 +28,13 @@ public class LoginPage extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(SecondFragment.this)
-//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-//            }
-//        });
+        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(FirstFragment.this)
+                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            }
+        });
     }
 
     @Override

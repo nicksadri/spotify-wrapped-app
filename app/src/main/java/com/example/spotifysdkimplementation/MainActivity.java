@@ -1,5 +1,8 @@
 package com.example.spotifysdkimplementation;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -9,6 +12,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
@@ -17,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -36,7 +51,50 @@ public class MainActivity extends AppCompatActivity {
     private String mAccessToken, mAccessCode;
     private Call mCall;
 
-    private TextView tokenTextView, codeTextView, profileTextView;
+    private TextView tokenTextView, codeTextView, profileTextView, topArtistsTextView, topTracksTextView;
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+//        // for now, hard coded. TODO: UI for sign up and logging in
+        String email = "advaybalak@gmail.com";
+        String password = "spotifywrapped";
+
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this, task -> {
+//                    if (task.isSuccessful()) {
+//                        // Sign in success, update UI with the signed-in user's information
+//                        Log.d(TAG, "createUserWithEmail:success");
+//                        FirebaseUser user = mAuth.getCurrentUser();
+//                    } else {
+//                        // If sign in fails, display a message to the user.
+//                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+//                        Toast.makeText(MainActivity.this, "Authentication failed.",
+//                                Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+        mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success");
+                    Toast.makeText(MainActivity.this, "User Signed In",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +104,16 @@ public class MainActivity extends AppCompatActivity {
         // Initialize the views
         tokenTextView = (TextView) findViewById(R.id.token_text_view);
         codeTextView = (TextView) findViewById(R.id.code_text_view);
-        profileTextView = (TextView) findViewById(R.id.response_text_view);
+        profileTextView = (TextView) findViewById(R.id.profile_text_view);
+        topArtistsTextView = (TextView) findViewById(R.id.top_artist_text_view);
+        topTracksTextView = (TextView) findViewById(R.id.top_track_text_view);
 
         // Initialize the buttons
         Button tokenBtn = (Button) findViewById(R.id.token_btn);
         Button codeBtn = (Button) findViewById(R.id.code_btn);
         Button profileBtn = (Button) findViewById(R.id.profile_btn);
+        Button topArtistButton = (Button) findViewById(R.id.top_artist_btn);
+        Button topTrackButton = (Button) findViewById(R.id.top_track_btn);
 
         // Set the click listeners for the buttons
 
@@ -64,8 +126,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         profileBtn.setOnClickListener((v) -> {
-            onGetUserProfileClicked();
+            onGetUserDataClicked();
         });
+
+        topArtistButton.setOnClickListener((v) -> {
+            onGetTopArtistDataClicked();
+        });
+
+        topTrackButton.setOnClickListener((v) -> {
+            onGetTopTrackDataClicked();
+        });
+
+        mAuth = FirebaseAuth.getInstance();
+
 
     }
 
@@ -78,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
     public void getToken() {
         final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.TOKEN);
         AuthorizationClient.openLoginActivity(MainActivity.this, AUTH_TOKEN_REQUEST_CODE, request);
+
     }
 
     /**
@@ -104,7 +178,25 @@ public class MainActivity extends AppCompatActivity {
         // Check which request code is present (if any)
         if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
             mAccessToken = response.getAccessToken();
+            System.out.println("access token: " + mAccessToken);
+            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+            // creating a user entry
+            Map<String, Object> user = new HashMap<>();
+            assert currentUser != null;
+            user.put("email", currentUser.getEmail());
+            user.put("api token", mAccessToken);
+            user.put("user_id", currentUser.getUid());
+
+            db.collection("users")
+                    .add(user)
+                    .addOnSuccessListener(
+                            documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: "
+                                    + documentReference.getId()))
+                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+
             setTextAsync(mAccessToken, tokenTextView);
+
 
         } else if (AUTH_CODE_REQUEST_CODE == requestCode) {
             mAccessCode = response.getCode();
@@ -113,23 +205,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Get user profile
-     * This method will get the user profile using the token
+     * Get user data clicked
+     * This method will get the user data using the token
+     * Data includes the user's profile data
      */
-    public void onGetUserProfileClicked() {
+    public void onGetUserDataClicked() {
         if (mAccessToken == null) {
             Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Create a request to get the user profile
-        final Request request = new Request.Builder()
+        final Request profileRequest = new Request.Builder()
                 .url("https://api.spotify.com/v1/me")
                 .addHeader("Authorization", "Bearer " + mAccessToken)
                 .build();
 
+
+
+
+
+
         cancelCall();
-        mCall = mOkHttpClient.newCall(request);
+        mCall = mOkHttpClient.newCall(profileRequest);
 
         mCall.enqueue(new Callback() {
             @Override
@@ -147,6 +245,88 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse data: " + e);
                     Toast.makeText(MainActivity.this, "Failed to parse data, watch Logcat for more details",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
+    }
+
+    /**
+     * Get top artist data for specific user
+     */
+    public void onGetTopArtistDataClicked() {
+        if (mAccessToken == null) {
+            Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final Request topArtistRequest = new Request.Builder()
+                //replace id for testing
+                .url("https://api.spotify.com/v1/me/top/artists")
+                .addHeader("Authorization", "Bearer " + mAccessToken)
+                .build();
+        cancelCall();
+        mCall = mOkHttpClient.newCall(topArtistRequest);
+        mCall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("HTTP", "Failed to fetch top artists data: " + e);
+                Toast.makeText(MainActivity.this, "Failed to fetch top artists data, watch Logcat for more details",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    setTextAsync(jsonObject.toString(3), profileTextView);
+                } catch (JSONException e) {
+                    Log.d("JSON", "Failed to parse top artists data: " + e);
+                    Toast.makeText(MainActivity.this, "Failed to parse top artists data, watch Logcat for more details",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    /**
+     * Get top track data for specific user
+     */
+
+    public void onGetTopTrackDataClicked() {
+        if (mAccessToken == null) {
+            Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        final Request topTrackRequest = new Request.Builder()
+                //replace playlist_id for testing
+                .url("https://api.spotify.com/v1/me/top/tracks")
+                .addHeader("Authorization", "Bearer " + mAccessToken)
+                .build();
+        cancelCall();
+        // Request for top tracks
+        mCall = mOkHttpClient.newCall(topTrackRequest);
+        mCall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("HTTP", "Failed to fetch top tracks data: " + e);
+                Toast.makeText(MainActivity.this, "Failed to fetch top tracks data, watch Logcat for more details",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    final JSONObject jsonObject = new JSONObject(response.body().string());
+                    setTextAsync(jsonObject.toString(3), profileTextView);
+                } catch (JSONException e) {
+                    Log.d("JSON", "Failed to parse top tracks data: " + e);
+                    Toast.makeText(MainActivity.this, "Failed to parse top tracks data, watch Logcat for more details",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -173,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
     private AuthorizationRequest getAuthenticationRequest(AuthorizationResponse.Type type) {
         return new AuthorizationRequest.Builder(CLIENT_ID, type, getRedirectUri().toString())
                 .setShowDialog(false)
-                .setScopes(new String[] { "user-read-email" }) // <--- Change the scope of your requested token here
+                .setScopes(new String[] { "user-read-email", "user-top-read" }) // <--- Change the scope of your requested token here
                 .setCampaign("your-campaign-token")
                 .build();
     }
@@ -186,6 +366,8 @@ public class MainActivity extends AppCompatActivity {
     private Uri getRedirectUri() {
         return Uri.parse(REDIRECT_URI);
     }
+
+
 
     private void cancelCall() {
         if (mCall != null) {
