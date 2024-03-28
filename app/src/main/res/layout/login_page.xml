@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginPage">
+
+    <RelativeLayout
+        android:id="@+id/login_page"
+        android:layout_width="385dp"
+        android:layout_height="800dp"
+        android:background="#FFFFFF"
+        android:clipToOutline="true" />
+
+    <TextView
+        android:id="@+id/log_in"
+        android:layout_width="88dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/log_in"
+        android:textAppearance="@style/log_in"
+        android:gravity="center_horizontal|top"
+        />
+
+    <EditText
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/input_email"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="128dp"
+        android:hint="@string/email"
+        android:background="@drawable/textfieldbackground"
+        />
+
+    <EditText
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/input_password"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="194dp"
+        android:hint="@string/password"
+        android:background="@drawable/textfieldbackground"
+        />
+
+    <Button
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/button_prim"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="338dp"
+        android:text="@string/log_in"
+        android:textAppearance="@style/log_in"
+        android:gravity="center_horizontal|top"
+        android:backgroundTint="@color/green"
+        />
+
+    <TextView
+        android:id="@+id/forgot_your"
+        android:layout_width="178dp"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="303dp"
+        android:text="@string/forgot_your"
+        android:textAppearance="@style/forgot_your"
+        android:gravity="top"
+        />
+
+    <TextView
+        android:id="@+id/don_t_have_"
+        android:layout_width="273dp"
+        android:layout_height="19dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="252dp"
+        android:text="@string/don_t_have_"
+        android:textAppearance="@style/don_t_have_"
+        android:gravity="top"
+        android:backgroundTint="@color/white"
+        />
+
+</RelativeLayout>
+
