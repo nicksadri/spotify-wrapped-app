@@ -59,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-//        // for now, hard coded. TODO: UI for sign up and logging in
         String email = "advaybalak@gmail.com";
         String password = "spotifywrapped";
+        setContentView(R.layout.login_page);
 
 //        mAuth.createUserWithEmailAndPassword(email, password)
 //                .addOnCompleteListener(this, task -> {
@@ -99,43 +99,46 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_page);
 
         // Initialize the views
-        tokenTextView = (TextView) findViewById(R.id.token_text_view);
-        codeTextView = (TextView) findViewById(R.id.code_text_view);
-        profileTextView = (TextView) findViewById(R.id.profile_text_view);
-        topArtistsTextView = (TextView) findViewById(R.id.top_artist_text_view);
-        topTracksTextView = (TextView) findViewById(R.id.top_track_text_view);
-
-        // Initialize the buttons
-        Button tokenBtn = (Button) findViewById(R.id.token_btn);
-        Button codeBtn = (Button) findViewById(R.id.code_btn);
-        Button profileBtn = (Button) findViewById(R.id.profile_btn);
-        Button topArtistButton = (Button) findViewById(R.id.top_artist_btn);
-        Button topTrackButton = (Button) findViewById(R.id.top_track_btn);
+//        tokenTextView = (TextView) findViewById(R.id.token_text_view);
+//        codeTextView = (TextView) findViewById(R.id.code_text_view);
+//        profileTextView = (TextView) findViewById(R.id.profile_text_view);
+//        topArtistsTextView = (TextView) findViewById(R.id.top_artist_text_view);
+//        topTracksTextView = (TextView) findViewById(R.id.top_track_text_view);
+//
+//        // Initialize the buttons
+//        Button tokenBtn = (Button) findViewById(R.id.token_btn);
+//        Button codeBtn = (Button) findViewById(R.id.code_btn);
+//        Button profileBtn = (Button) findViewById(R.id.profile_btn);
+//        Button topArtistButton = (Button) findViewById(R.id.top_artist_btn);
+////        Button topTrackButton = (Button) findViewById(R.id.top_track_btn);
+        Button logInButton = (Button) findViewById(R.id.button_prim);
 
         // Set the click listeners for the buttons
 
-        tokenBtn.setOnClickListener((v) -> {
-            getToken();
-        });
+//        tokenBtn.setOnClickListener((v) -> {
+//            getToken();
+//        });
+//
+//        codeBtn.setOnClickListener((v) -> {
+//            getCode();
+//        });
+//
+//        profileBtn.setOnClickListener((v) -> {
+//            onGetUserDataClicked();
+//        });
+//
+//        topArtistButton.setOnClickListener((v) -> {
+//            onGetTopArtistDataClicked();
+//        });
+//
+//        topTrackButton.setOnClickListener((v) -> {
+//            onGetTopTrackDataClicked();
 
-        codeBtn.setOnClickListener((v) -> {
-            getCode();
-        });
 
-        profileBtn.setOnClickListener((v) -> {
-            onGetUserDataClicked();
-        });
 
-        topArtistButton.setOnClickListener((v) -> {
-            onGetTopArtistDataClicked();
-        });
-
-        topTrackButton.setOnClickListener((v) -> {
-            onGetTopTrackDataClicked();
-        });
 
         mAuth = FirebaseAuth.getInstance();
 
