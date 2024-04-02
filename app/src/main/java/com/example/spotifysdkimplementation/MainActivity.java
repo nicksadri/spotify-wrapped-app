@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.spotifysdkimplementation.databinding.LoginPageBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
@@ -54,46 +57,97 @@ public class MainActivity extends AppCompatActivity {
     private TextView tokenTextView, codeTextView, profileTextView, topArtistsTextView, topTracksTextView;
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser currentUser;
+    private EditText inputEmail, inputPassword;
+    private Button logInButton;
 
 
     @Override
     public void onStart() {
         super.onStart();
-        String email = "advaybalak@gmail.com";
-        String password = "spotifywrapped";
+
         setContentView(R.layout.login_page);
 
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this, task -> {
-//                    if (task.isSuccessful()) {
-//                        // Sign in success, update UI with the signed-in user's information
-//                        Log.d(TAG, "createUserWithEmail:success");
-//                        FirebaseUser user = mAuth.getCurrentUser();
-//                    } else {
-//                        // If sign in fails, display a message to the user.
-//                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-//                        Toast.makeText(MainActivity.this, "Authentication failed.",
-//                                Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-        mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success");
-                    Toast.makeText(MainActivity.this, "User Signed In",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(MainActivity.this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
+        Button loginPage = findViewById(R.id.button_prim);
+        inputEmail = findViewById(R.id.input_email);
+        inputPassword = findViewById(R.id.input_password);
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        loginPage.setOnClickListener(v -> {
+            checkUserExists(inputEmail.getText().toString(), inputPassword.getText().toString());
+        });
+    }
 
+    private void checkUserExists(String email, String password) {
+        // Check if the user exists in your database
+        db.collection("users")
+                .whereEqualTo("email", email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (task.getResult().isEmpty()) {
+                            signUpUser(email, password);
+                        } else {
+                            signInUser(email, password);
+                        }
+                    } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
+                        // Handle error
+                    }
+                });
+    }
 
+    private void signInUser(String email, String password) {
+        mAuth.signInWithEmailAndPassword(inputEmail.getText().toString(), inputPassword.getText().toString())
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        db.collection("users")
+                                .whereEqualTo("email", email)
+                                .get()
+                                .addOnCompleteListener(task2 -> {
+                                    if (task2.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task2.getResult()) {
+                                            mAccessCode = document.getString("auth_code");
+                                        }
+                                        currentUser = mAuth.getCurrentUser();
+                                    } else {
+                                        Log.w(TAG, "Error getting documents.", task.getException());
+                                        // Handle error
+                                    }
+                                });
+
+                        Log.d(TAG, "signInWithEmail:success");
+
+                        Toast.makeText(MainActivity.this, "User Signed In",
+                                Toast.LENGTH_SHORT).show();
+                        System.out.printf("auth code: %s", mAccessCode);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    private void signUpUser(String email, String password) {
+        // Create a new user with email and password
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign up success, update UI with the signed-in user's information
+                        currentUser = mAuth.getCurrentUser();
+                        // Proceed with further actions (e.g., saving user data to the database)
+                        getCode();
+
+                    } else {
+                        // If sign up fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        currentUser = mAuth.getCurrentUser();
     }
 
     @Override
@@ -114,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 //        Button profileBtn = (Button) findViewById(R.id.profile_btn);
 //        Button topArtistButton = (Button) findViewById(R.id.top_artist_btn);
 ////        Button topTrackButton = (Button) findViewById(R.id.top_track_btn);
-        Button logInButton = (Button) findViewById(R.id.button_prim);
+//        Button logInButton = (Button) findViewById(R.id.button_prim);
 
         // Set the click listeners for the buttons
 
@@ -136,8 +190,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        topTrackButton.setOnClickListener((v) -> {
 //            onGetTopTrackDataClicked();
-
-
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -182,13 +234,19 @@ public class MainActivity extends AppCompatActivity {
         if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
             mAccessToken = response.getAccessToken();
             System.out.println("access token: " + mAccessToken);
-            FirebaseUser currentUser = mAuth.getCurrentUser();
+
+            setTextAsync(mAccessToken, tokenTextView);
+
+
+        } else if (AUTH_CODE_REQUEST_CODE == requestCode) {
+            mAccessCode = response.getCode();
 
             // creating a user entry
             Map<String, Object> user = new HashMap<>();
             assert currentUser != null;
+
             user.put("email", currentUser.getEmail());
-            user.put("api token", mAccessToken);
+            user.put("auth_code", mAccessCode);
             user.put("user_id", currentUser.getUid());
 
             db.collection("users")
@@ -197,13 +255,10 @@ public class MainActivity extends AppCompatActivity {
                             documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: "
                                     + documentReference.getId()))
                     .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+            Toast.makeText(MainActivity.this, "Signed Up.",
+                    Toast.LENGTH_SHORT).show();
 
-            setTextAsync(mAccessToken, tokenTextView);
-
-
-        } else if (AUTH_CODE_REQUEST_CODE == requestCode) {
-            mAccessCode = response.getCode();
-            setTextAsync(mAccessCode, codeTextView);
+//            setTextAsync(mAccessCode, codeTextView);
         }
     }
 
