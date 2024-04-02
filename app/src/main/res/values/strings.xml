@@ -11,6 +11,6 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="show">Show</string>
-    <string name="don_t_have_">Don't have an account? Create One</string>
+    <string name="don_t_have_">Don\'t have an account? Create One</string>
     <string name="forgot_your">Forgot your password?</string>
 </resources>

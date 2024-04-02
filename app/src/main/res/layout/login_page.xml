@@ -66,7 +66,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="338dp"
         android:text="@string/log_in"
-        android:textAppearance="@style/log_in"
+        android:textAppearance="@style/log_in_button"
         android:gravity="center_horizontal|top"
         android:backgroundTint="@color/green"
         />
