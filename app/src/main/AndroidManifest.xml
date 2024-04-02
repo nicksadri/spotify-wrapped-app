@@ -35,6 +35,10 @@
         <activity
             android:name=".AccountCreationPage"
             android:exported="true" />
+        <activity
+            android:name=".TopArtistPage"
+            android:exported="true" />
+
     </application>
 
 </manifest>
