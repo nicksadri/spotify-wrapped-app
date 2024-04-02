@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountInfoPage">
+
+    <View
+        android:id="@+id/rectangle_2"
+        android:layout_width="0dp"
+        android:layout_height="246dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#1ED760"
+        />
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="50dp"
+        android:layout_height="19dp"
+        android:layout_alignBottom="@+id/rectangle_2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="184dp"
+        android:gravity="top"
+        android:text="@string/delete"
+        android:textAppearance="@style/delete" />
+
+    <TextView
+        android:id="@+id/account"
+        android:layout_width="123dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="142dp"
+        android:gravity="center_horizontal|top"
+        android:text="@string/account"
+        android:textAppearance="@style/account" />
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="54dp"
+        android:layout_height="19dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="44dp"
+        android:layout_marginRight="27dp"
+        android:gravity="right|top"
+        android:text="@string/logout"
+        android:textAppearance="@style/logout" />
+
+    <View
+        android:id="@+id/logo"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/spotifylogo" />
+
+    <TextView
+        android:id="@+id/george_burd"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="302dp"
+        android:text="@string/george_burd"
+        android:textAppearance="@style/george_burd"
+        android:gravity="center_horizontal|top"
+        />
+
+    <TextView
+        android:id="@+id/username_gb"
+        android:layout_width="162dp"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="125dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="346dp"
+        android:text="@string/username_gb"
+        android:textAppearance="@style/username_gb"
+        android:gravity="center_horizontal|top"
+        />
+
+    <Button
+        android:id="@+id/change_username_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="98dp"
+        android:layout_marginBottom="246dp"
+        android:backgroundTint="#1ED760"
+        android:text="Change Username" />
+
+    <Button
+        android:id="@+id/change_password_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="163dp"
+        android:backgroundTint="#1ED760"
+        android:text="Change Password" />
+
+    <Button
+        android:id="@+id/delete_account_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="86dp"
+        android:backgroundTint="#000000"
+        android:text="Delete Account" />
+
+
+</RelativeLayout>

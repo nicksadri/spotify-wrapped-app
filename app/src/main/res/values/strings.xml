@@ -16,4 +16,9 @@
     <string name="click_for_wrapped">Click below for your 2340 Wrapped</string>
     <string name="previous_wrapped">Previous wrapped</string>
     <string name="create_acco">Create Account</string>
+    <string name="delete">Delete</string>
+    <string name="account">Account</string>
+    <string name="logout">Logout</string>
+    <string name="george_burd">George P. Burdell</string>
+    <string name="username_gb">Username: gburdell3</string>
 </resources>
