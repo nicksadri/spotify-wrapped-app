@@ -13,4 +13,6 @@
     <string name="show">Show</string>
     <string name="don_t_have_">Don\'t have an account? Create One</string>
     <string name="forgot_your">Forgot your password?</string>
+    <string name="click_for_wrapped">Click below for your 2340 Wrapped</string>
+    <string name="previous_wrapped">Previous wrapped</string>
 </resources>

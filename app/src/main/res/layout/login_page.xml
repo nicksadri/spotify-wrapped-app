@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/log_in"
-        android:layout_width="88dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
