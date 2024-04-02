@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccountCreationPage">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/page_header"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/account_cre"
+        android:layout_width="411dp"
+        android:layout_height="730dp"
+        android:background="#FFFFFF"
+        android:clipToOutline="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <Button
+            android:id="@+id/confirm_creation"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="110dp"
+            android:layout_marginBottom="311dp"
+            android:backgroundTint="#1ED760"
+            android:text="Confirm" />
+
+        <Button
+            android:id="@+id/cancel_creation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="165dp"
+            android:layout_marginBottom="232dp"
+            android:backgroundTint="#1ED760"
+            android:text="Cancel" />
+
+        <TextView
+            android:id="@+id/create_acco"
+            android:layout_width="227dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="106dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/create_acco"
+            android:textAppearance="@style/create_acco"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.09" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/input_text"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="128dp"
+        />
+
+    <EditText
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/input_email"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="128dp"
+        android:hint="@string/email"
+        android:background="@drawable/textfieldbackground"
+        />
+
+    <EditText
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/input_password"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="194dp"
+        android:hint="@string/password"
+        android:background="@drawable/textfieldbackground"
+        />
+
+    <EditText
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/confirm_password"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="21dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="265dp"
+        android:hint="Confirm Password"
+        android:background="@drawable/textfieldbackground"
+        />
+
+
+</RelativeLayout>

@@ -32,6 +32,9 @@
         <activity
             android:name=".WrappedPage"
             android:exported="true" />
+        <activity
+            android:name=".AccountCreationPage"
+            android:exported="true" />
     </application>
 
 </manifest>
