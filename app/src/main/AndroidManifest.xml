@@ -44,6 +44,9 @@
         <activity
             android:name=".DeleteAccountPage"
             android:exported="true" />
+        <activity
+            android:name=".ChangeUsernamePage"
+            android:exported="true" />
 
     </application>
 

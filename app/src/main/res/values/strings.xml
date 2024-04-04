@@ -29,5 +29,7 @@
     <string name="we_ll_miss_">We\'ll miss you!</string>
     <string name="this_action">This action is irreversible.\n\nAre you sure you want to delete your 2340 Wrapped account?</string>
     <string name="return_to_a">Return to account </string>
+    <string name="change_user">Change Username</string>
+
 
 </resources>
