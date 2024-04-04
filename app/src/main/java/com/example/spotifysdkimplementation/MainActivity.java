@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     private EditText inputEmail, inputPassword;
     private Button logInButton;
+    private TextView createAccount;
 
 
     @Override
@@ -72,10 +73,19 @@ public class MainActivity extends AppCompatActivity {
         Button loginPage = findViewById(R.id.button_prim);
         inputEmail = findViewById(R.id.input_email);
         inputPassword = findViewById(R.id.input_password);
+        createAccount = findViewById((R.id.don_t_have_));
 
         loginPage.setOnClickListener(v -> {
             checkUserExists(inputEmail.getText().toString(), inputPassword.getText().toString());
         });
+
+//        createAccount.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, AccountCreationPage.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void checkUserExists(String email, String password) {
