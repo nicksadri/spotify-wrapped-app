@@ -139,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                         currentUser = mAuth.getCurrentUser();
                         // Proceed with further actions (e.g., saving user data to the database)
                         getCode();
-
                     } else {
                         // If sign up fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
