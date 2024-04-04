@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/intro_text"
         android:layout_width="300dp"
-        android:layout_height="141dp"
+        android:layout_height="160dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="43dp"
         android:layout_alignParentTop="true"
@@ -31,7 +31,7 @@
     <Button
         android:id="@+id/log_in"
         android:layout_width="239dp"
-        android:layout_height="64dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="136dp"

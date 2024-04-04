@@ -23,6 +23,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LoginPage"
+            android:exported="true" />
+        <activity
+            android:name=".WelcomePage"
+            android:exported="true" />
+        <activity
+            android:name=".WrappedPage"
+            android:exported="true" />
+        <activity
+            android:name=".AccountCreationPage"
+            android:exported="true" />
+        <activity
+            android:name=".AccountInfoPage"
+            android:exported="true" />
+        <activity
+            android:name=".TopArtistPage"
+            android:exported="true" />
+        <activity
+            android:name=".DeleteAccountPage"
+            android:exported="true" />
+        <activity
+            android:name=".ChangeUsernamePage"
+            android:exported="true" />
+
     </application>
 
 </manifest>
