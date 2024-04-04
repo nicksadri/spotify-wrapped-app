@@ -38,6 +38,10 @@
         <activity
             android:name=".AccountInfoPage"
             android:exported="true" />
+        <activity
+            android:name=".TopArtistPage"
+            android:exported="true" />
+
     </application>
 
 </manifest>

@@ -19,11 +19,11 @@
     <TextView
         android:id="@+id/delete"
         android:layout_width="50dp"
-        android:layout_height="19dp"
+        android:layout_height="20dp"
         android:layout_alignBottom="@+id/rectangle_2"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="12dp"
-        android:layout_marginBottom="184dp"
+        android:layout_marginBottom="183dp"
         android:gravity="top"
         android:text="@string/delete"
         android:textAppearance="@style/delete" />
@@ -34,8 +34,8 @@
         android:layout_height="36dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="142dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="143dp"
         android:gravity="center_horizontal|top"
         android:text="@string/account"
         android:textAppearance="@style/account" />
@@ -43,7 +43,7 @@
     <TextView
         android:id="@+id/logout"
         android:layout_width="54dp"
-        android:layout_height="19dp"
+        android:layout_height="22dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="44dp"
@@ -65,28 +65,26 @@
     <TextView
         android:id="@+id/george_burd"
         android:layout_width="250dp"
-        android:layout_height="36dp"
+        android:layout_height="45dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="81dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="81dp"
         android:layout_marginTop="302dp"
-        android:text="@string/george_burd"
-        android:textAppearance="@style/george_burd"
         android:gravity="center_horizontal|top"
-        />
+        android:text="@string/george_burd"
+        android:textAppearance="@style/george_burd" />
 
     <TextView
         android:id="@+id/username_gb"
         android:layout_width="162dp"
-        android:layout_height="19dp"
+        android:layout_height="25dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="125dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="346dp"
-        android:text="@string/username_gb"
-        android:textAppearance="@style/username_gb"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="353dp"
         android:gravity="center_horizontal|top"
-        />
+        android:text="@string/username_gb"
+        android:textAppearance="@style/username_gb" />
 
     <Button
         android:id="@+id/change_username_button"
