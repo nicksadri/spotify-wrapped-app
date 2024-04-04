@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreviousWrappedPage">
+
+    <TextView
+        android:id="@+id/wrapped_his"
+        android:layout_width="106dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="153dp"
+        android:layout_marginBottom="646dp"
+        android:gravity="center_horizontal|top"
+        android:text="@string/wrapped_his"
+        android:textAppearance="@style/wrapped_his" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="492dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="137dp" />
+
+</RelativeLayout>
