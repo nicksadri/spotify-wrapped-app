@@ -258,7 +258,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Signed Up.",
                     Toast.LENGTH_SHORT).show();
 
-//            setTextAsync(mAccessCode, codeTextView);
         }
     }
 
