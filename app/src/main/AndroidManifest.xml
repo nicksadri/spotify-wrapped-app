@@ -41,6 +41,9 @@
         <activity
             android:name=".TopArtistPage"
             android:exported="true" />
+        <activity
+            android:name=".DeleteAccountPage"
+            android:exported="true" />
 
     </application>
 

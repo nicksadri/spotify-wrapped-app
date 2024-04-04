@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#01ED76"
+    android:backgroundTint="#1ED760"
+    tools:context=".DeleteAccountPage">
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="343dp"
+        android:layout_height="315dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="242dp"
+        android:background="@color/white"
+        android:elevation="0dp" />
+
+    <TextView
+        android:id="@+id/we_ll_miss_"
+        android:layout_width="330dp"
+        android:layout_height="37.8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="275.6dp"
+        android:backgroundTint="@color/black"
+        android:gravity="center_horizontal|top"
+        android:text="@string/we_ll_miss_"
+        android:textAppearance="@style/we_ll_miss_"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/this_action"
+        android:layout_width="311dp"
+        android:layout_height="79.8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="330.2dp"
+        android:text="@string/this_action"
+        android:textAppearance="@style/this_action"
+        android:gravity="center_horizontal|top"
+        />
+
+    <Button
+        android:id="@+id/deleteAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/bg"
+        android:layout_alignBottom="@+id/bg"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="59dp"
+        android:backgroundTint="#1ED760"
+        android:text="Delete Account" />
+
+    <TextView
+        android:id="@+id/return_to_a"
+        android:layout_width="311dp"
+        android:layout_height="19.95dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="511.35dp"
+        android:text="@string/return_to_a"
+        android:textAppearance="@style/return_to_a"
+        android:gravity="center_horizontal|top"
+        />
+
+
+</RelativeLayout>
