@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private String mAccessToken, mAccessCode;
     private Call mCall;
 
-    private TextView tokenTextView, codeTextView, profileTextView, topArtistsTextView, topTracksTextView;
+    private TextView tokenTextView, codeTextView, profileTextView, topArtistsTextView, topTracksTextView, createAccountTextView;
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser currentUser;
@@ -168,9 +169,17 @@ public class MainActivity extends AppCompatActivity {
 //        Button profileBtn = (Button) findViewById(R.id.profile_btn);
 //        Button topArtistButton = (Button) findViewById(R.id.top_artist_btn);
 ////        Button topTrackButton = (Button) findViewById(R.id.top_track_btn);
-//        Button logInButton = (Button) findViewById(R.id.button_prim);
+        Button logInButton = (Button) findViewById(R.id.button_prim);
+        createAccountTextView = (TextView) findViewById(R.id.don_t_have_);
 
         // Set the click listeners for the buttons
+
+        createAccountTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 //        tokenBtn.setOnClickListener((v) -> {
 //            getToken();
