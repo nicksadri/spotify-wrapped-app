@@ -26,13 +26,18 @@
     <string name="artistName3">Name 3</string>
     <string name="artistName4">Name 4</string>
     <string name="artistName5">Name 5</string>
+    <string name="trackName1">Name 1</string>
+    <string name="trackName2">Name 2</string>
+    <string name="trackName3">Name 3</string>
+    <string name="trackName4">Name 4</string>
+    <string name="trackName5">Name 5</string>
     <string name="we_ll_miss_">We\'ll miss you!</string>
     <string name="this_action">This action is irreversible.\n\nAre you sure you want to delete your 2340 Wrapped account?</string>
     <string name="return_to_a">Return to account </string>
     <string name="change_user">Change Username</string>
     <string name="change_pass">Change Password</string>
     <string name="wrapped_his">History</string>
-
+    <string name="insert_mins">Insert Mins</string>
 
 
 </resources>

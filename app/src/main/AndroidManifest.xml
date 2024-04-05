@@ -53,6 +53,12 @@
         <activity
             android:name=".PreviousWrappedPage"
             android:exported="true" />
+        <activity
+            android:name=".TopTrackPage"
+            android:exported="true" />
+        <activity
+            android:name=".ListeningTimePage"
+            android:exported="true" />
 
     </application>
 
