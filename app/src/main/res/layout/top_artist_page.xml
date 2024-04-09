@@ -26,6 +26,18 @@
             android:gravity="center_horizontal|top"
             android:text="Top Artists"
             android:textAppearance="@style/top_artists" />
+
+        <Button
+            android:id="@+id/artistsNextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="162dp"
+            android:layout_marginBottom="49dp"
+            android:backgroundTint="@color/green"
+            android:text="Next"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
     <TextView

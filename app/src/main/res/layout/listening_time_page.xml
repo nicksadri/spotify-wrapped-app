@@ -54,6 +54,18 @@
             android:gravity="center_horizontal|top"
             android:text="minutes"
             android:textAppearance="@style/minutes" />
+
+        <Button
+            android:id="@+id/wrappedDoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="157dp"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="@color/green"
+            android:text="Done"
+            android:textColor="@color/black" />
     </RelativeLayout>
 
 </RelativeLayout>

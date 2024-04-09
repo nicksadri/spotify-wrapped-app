@@ -32,7 +32,7 @@
 
     <Button
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/log_in_butt"
+        android:id="@+id/previous_wrapped_button"
         android:layout_width="239dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
