@@ -26,11 +26,22 @@ public class AccountCreationPage extends AppCompatActivity {
         setContentView(R.layout.account_creation_page);
 
         cancel = findViewById(R.id.cancel_creation);
+        confirm = findViewById(R.id.confirm_creation);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AccountCreationPage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // INPUT METHOD FOR CREATING ACCOUNT IN FIREBASE
+
+                Intent intent = new Intent(AccountCreationPage.this, WrappedPage.class);
                 startActivity(intent);
             }
         });
