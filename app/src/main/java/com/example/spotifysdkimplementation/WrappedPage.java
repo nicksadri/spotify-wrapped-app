@@ -17,7 +17,7 @@ import com.example.spotifysdkimplementation.databinding.WrappedPageBinding;
 public class WrappedPage extends AppCompatActivity {
 
     private WrappedPageBinding binding;
-    private Button previous;
+    private Button previous, account;
     private View wrapped;
 
     @Override
@@ -27,6 +27,7 @@ public class WrappedPage extends AppCompatActivity {
 
         previous = findViewById(R.id.previous_wrapped_button);
         wrapped = findViewById(R.id.wrapped_art);
+        account = findViewById(R.id.accessAccountButton);
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +41,14 @@ public class WrappedPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WrappedPage.this, TopArtistPage.class);
+                startActivity(intent);
+            }
+        });
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WrappedPage.this, AccountInfoPage.class);
                 startActivity(intent);
             }
         });
