@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,6 +37,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -58,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView tokenTextView, codeTextView, profileTextView, topArtistsTextView, topTracksTextView, createAccountTextView;
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseUser currentUser;
+    static FirebaseUser currentUser;
+
+    static String currentUserID;
     private EditText inputEmail, inputPassword;
     private Button logInButton;
     private TextView createAccount;
@@ -76,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         createAccount = findViewById((R.id.don_t_have_));
 
         loginPage.setOnClickListener(v -> {
-            checkUserExists(inputEmail.getText().toString(), inputPassword.getText().toString());
+            signInUser(inputEmail.getText().toString(), inputPassword.getText().toString());
+
         });
 
 //        createAccount.setOnClickListener(new View.OnClickListener() {
@@ -96,30 +101,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void checkUserExists(String email, String password) {
-        // Check if the user exists in your database
-        db.collection("users")
-                .whereEqualTo("email", email)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        if (task.getResult().isEmpty()) {
-                            signUpUser(email, password);
-                        } else {
-                            signInUser(email, password);
-                        }
-                    } else {
-                        Log.w(TAG, "Error getting documents.", task.getException());
-                        // Handle error
-                    }
-                });
-    }
-
     private void signInUser(String email, String password) {
         mAuth.signInWithEmailAndPassword(inputEmail.getText().toString(), inputPassword.getText().toString())
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
+                        currentUser = mAuth.getCurrentUser();
+                        currentUserID = currentUser.getUid();
                         db.collection("users")
                                 .whereEqualTo("email", email)
                                 .get()
@@ -127,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
                                     if (task2.isSuccessful()) {
                                         for (QueryDocumentSnapshot document : task2.getResult()) {
                                             mAccessCode = document.getString("auth_code");
+                                            currentUserID = document.getString("user_id");
                                         }
-                                        currentUser = mAuth.getCurrentUser();
+                                        getCode();
                                     } else {
                                         Log.w(TAG, "Error getting documents.", task.getException());
                                         // Handle error
@@ -139,33 +128,31 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, "User Signed In",
                                 Toast.LENGTH_SHORT).show();
-                        System.out.printf("auth code: %s", mAccessCode);
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(MainActivity.this, "Authentication failed.",
+                        Toast.makeText(MainActivity.this, "User Sign In failed.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-    private void signUpUser(String email, String password) {
-        // Create a new user with email and password
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign up success, update UI with the signed-in user's information
-                        currentUser = mAuth.getCurrentUser();
-                        // Proceed with further actions (e.g., saving user data to the database)
-                        getCode();
-                    } else {
-                        // If sign up fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(MainActivity.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
 
-        currentUser = mAuth.getCurrentUser();
+    private void deleteUser() {
+        Objects.requireNonNull(mAuth.getCurrentUser()).delete();
+        db.collection("users")
+                .whereEqualTo("user_id", currentUserID)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        // Get the reference to the document
+                        DocumentReference userRef = documentSnapshot.getReference();
+                        // Delete the user document
+                        userRef.delete()
+                                .addOnSuccessListener(aVoid -> Log.d(TAG, "User document deleted successfully"))
+                                .addOnFailureListener(e -> Log.w(TAG, "Error deleting user document", e));
+                    }
+                })
+                .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
     }
 
     @Override
@@ -232,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
     public void getToken() {
         final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.TOKEN);
         AuthorizationClient.openLoginActivity(MainActivity.this, AUTH_TOKEN_REQUEST_CODE, request);
-
     }
 
     /**
@@ -263,28 +249,28 @@ public class MainActivity extends AppCompatActivity {
 
             setTextAsync(mAccessToken, tokenTextView);
 
-
         } else if (AUTH_CODE_REQUEST_CODE == requestCode) {
             mAccessCode = response.getCode();
 
-            // creating a user entry
-            Map<String, Object> user = new HashMap<>();
-            assert currentUser != null;
-
-            user.put("email", currentUser.getEmail());
-            user.put("auth_code", mAccessCode);
-            user.put("user_id", currentUser.getUid());
-
             db.collection("users")
-                    .add(user)
-                    .addOnSuccessListener(
-                            documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: "
-                                    + documentReference.getId()))
-                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-            Toast.makeText(MainActivity.this, "Signed Up.",
-                    Toast.LENGTH_SHORT).show();
+                    .whereEqualTo("user_id", currentUserID)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            // Get the reference to the document
+                            DocumentReference userRef = documentSnapshot.getReference();
 
+                            // Now update the auth_code field for this user document
+                            userRef.update("auth_code", mAccessCode)
+                                    .addOnSuccessListener(aVoid -> Log.d(TAG, "Auth code updated successfully"))
+                                    .addOnFailureListener(e -> Log.w(TAG, "Error updating auth code", e));
+                        }
+                    })
+                    .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
         }
+        Intent intent = new Intent(MainActivity.this, WrappedPage.class);
+        startActivity(intent);
+
     }
 
     /**
@@ -303,11 +289,6 @@ public class MainActivity extends AppCompatActivity {
                 .url("https://api.spotify.com/v1/me")
                 .addHeader("Authorization", "Bearer " + mAccessToken)
                 .build();
-
-
-
-
-
 
         cancelCall();
         mCall = mOkHttpClient.newCall(profileRequest);
@@ -446,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @return redirect Uri object
      */
-    private Uri getRedirectUri() {
+    public static Uri getRedirectUri() {
         return Uri.parse(REDIRECT_URI);
     }
 

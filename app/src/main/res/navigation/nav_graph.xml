@@ -24,5 +24,17 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_accountCreationPage"
+            app:destination="@id/accountCreationPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountCreationPage"
+        android:name="com.example.spotifysdkimplementation.AccountCreationPage"
+        android:label="account_creation_page"
+        tools:layout="@layout/account_creation_page" >
+        <action
+            android:id="@+id/action_accountCreationPage_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>
