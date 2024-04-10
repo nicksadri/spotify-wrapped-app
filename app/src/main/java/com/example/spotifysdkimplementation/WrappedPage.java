@@ -102,6 +102,8 @@ public class WrappedPage extends AppCompatActivity {
 
         if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
             Log.d("Wrapped page", response.getAccessToken());
+            MainActivity.mAccessToken = response.getAccessToken();
+
             db.collection("users")
                     .whereEqualTo("user_id", MainActivity.currentUserID)
                     .get()
