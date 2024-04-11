@@ -46,6 +46,8 @@ public class TopArtistPage extends AppCompatActivity {
     private final OkHttpClient mOkHttpClient = new OkHttpClient();
     private Call mCall;
     private FirebaseAuth mAuth;
+
+    private TextView artist1, artist1Name, artist2, artist2Name, artist3, artist3Name, artist4, artist4Name, artist5, artist5Name;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -55,6 +57,12 @@ public class TopArtistPage extends AppCompatActivity {
         setContentView(R.layout.top_artist_page);
 
         artistNext = findViewById(R.id.artistsNextButton);
+
+        artist1Name = findViewById(R.id.artistName1);
+        artist2Name = findViewById(R.id.artistName2);
+        artist3Name = findViewById(R.id.artistName3);
+        artist4Name = findViewById(R.id.artistName4);
+        artist5Name = findViewById(R.id.artistName5);
 
         artistNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +162,12 @@ public class TopArtistPage extends AppCompatActivity {
                         String artistName = artist.getString("name");
                         topArtistsList.add(artistName);
                     }
+                    Log.d("Artist 1", topArtistsList.get(0));
+                    setTextAsync(topArtistsList.get(0), artist1Name);
+                    setTextAsync(topArtistsList.get(1), artist2Name);
+                    setTextAsync(topArtistsList.get(2), artist3Name);
+                    setTextAsync(topArtistsList.get(3), artist4Name);
+                    setTextAsync(topArtistsList.get(4), artist5Name);
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top artists data: " + e);
                     Toast.makeText(TopArtistPage.this, "Failed to parse top artists data, watch Logcat for more details",
