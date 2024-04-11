@@ -114,7 +114,7 @@ public class TopTrackPage extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
-                    Log.d("Successful:", "response sent");
+                    Log.d("Successful:", response.body().string());
 
                     final JSONObject jsonObject = new JSONObject(response.body().string());
                     Log.d("Test", jsonObject.toString());
@@ -122,9 +122,10 @@ public class TopTrackPage extends AppCompatActivity {
                     List<String> images = new ArrayList<>();
                     for (int i = 0; i < 5; i++) {
                         JSONObject track = tracksArray.getJSONObject(i);
-                        String trackName = track.getString("name");
+                        JSONObject album = track.getJSONObject("album");
+                        String trackName = album.getString("name");
                         topTracksList.add(trackName);
-                        JSONArray imagesArray = track.getJSONArray("images");
+                        JSONArray imagesArray = album.getJSONArray("images");
 
                         String imageUrl = null;
                         if (imagesArray.length() > 0) {
