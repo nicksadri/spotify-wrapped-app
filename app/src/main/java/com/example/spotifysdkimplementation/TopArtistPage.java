@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -47,7 +48,9 @@ public class TopArtistPage extends AppCompatActivity {
     private Call mCall;
     private FirebaseAuth mAuth;
 
-    private TextView artist1, artist1Name, artist2, artist2Name, artist3, artist3Name, artist4, artist4Name, artist5, artist5Name;
+    private TextView artist1Name, artist2Name, artist3Name, artist4Name, artist5Name;
+
+    private ImageView imageView1, imageView2, imageView3, imageView4, imageView5;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -63,6 +66,12 @@ public class TopArtistPage extends AppCompatActivity {
         artist3Name = findViewById(R.id.artistName3);
         artist4Name = findViewById(R.id.artistName4);
         artist5Name = findViewById(R.id.artistName5);
+
+        imageView1 = findViewById(R.id.artistImage1);
+        imageView2 = findViewById(R.id.artistImage2);
+        imageView3 = findViewById(R.id.artistImage3);
+        imageView4 = findViewById(R.id.artistImage4);
+        imageView5 = findViewById(R.id.artistImage5);
 
         artistNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +136,7 @@ public class TopArtistPage extends AppCompatActivity {
         }
     }
 
-    public List<String> test() {
+    public List<String> getArtistsAsList() {
         List<String> topArtistsList = new ArrayList<>();
 
         if (MainActivity.mAccessToken == null) {
@@ -156,18 +165,30 @@ public class TopArtistPage extends AppCompatActivity {
 
                     final JSONObject jsonObject = new JSONObject(response.body().string());
                     JSONArray artistsArray = jsonObject.getJSONArray("items");
-
+                    List<String> images = new ArrayList<>();
                     for (int i = 0; i < 5; i++) {
                         JSONObject artist = artistsArray.getJSONObject(i);
                         String artistName = artist.getString("name");
                         topArtistsList.add(artistName);
+                        JSONArray imagesArray = artist.getJSONArray("images");
+
+                        String imageUrl = null;
+                        if (imagesArray.length() > 0) {
+                            JSONObject imageObject = imagesArray.getJSONObject(0);
+                            imageUrl = imageObject.getString("url");
+                            images.add(imageUrl);
+                        }
                     }
-                    Log.d("Artist 1", topArtistsList.get(0));
                     setTextAsync(topArtistsList.get(0), artist1Name);
                     setTextAsync(topArtistsList.get(1), artist2Name);
                     setTextAsync(topArtistsList.get(2), artist3Name);
                     setTextAsync(topArtistsList.get(3), artist4Name);
                     setTextAsync(topArtistsList.get(4), artist5Name);
+                    setImageAsync(images.get(0), imageView1);
+                    setImageAsync(images.get(1), imageView2);
+                    setImageAsync(images.get(2), imageView3);
+                    setImageAsync(images.get(3), imageView4);
+                    setImageAsync(images.get(4), imageView5);
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top artists data: " + e);
                     Toast.makeText(TopArtistPage.this, "Failed to parse top artists data, watch Logcat for more details",
@@ -228,7 +249,7 @@ public class TopArtistPage extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
         }
-        test();
+        getArtistsAsList();
     }
 
     /**
@@ -240,6 +261,19 @@ public class TopArtistPage extends AppCompatActivity {
      */
     private void setTextAsync(final String text, TextView textView) {
         runOnUiThread(() -> textView.setText(text));
+    }
+
+    private void setImageAsync(final String imageUrl, final ImageView imageView) {
+        runOnUiThread(() -> {
+            RequestOptions requestOptions = new RequestOptions()
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.placeholder_image);
+
+            Glide.with(this)
+                    .load(imageUrl)
+                    .apply(requestOptions)
+                    .into(imageView);
+        });
     }
 
 }
