@@ -138,8 +138,6 @@ public class TopTrackPage extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
-                    Log.d("Successful:", response.body().string());
-
                     final JSONObject jsonObject = new JSONObject(response.body().string());
                     Log.d("Test", jsonObject.toString());
                     JSONArray tracksArray = jsonObject.getJSONArray("items");
