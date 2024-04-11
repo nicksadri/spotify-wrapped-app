@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         currentUser = mAuth.getCurrentUser();
+                        assert currentUser != null;
                         currentUserID = currentUser.getUid();
                         db.collection("users")
                                 .whereEqualTo("email", email)
@@ -141,24 +142,6 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    private void deleteUser() {
-        Objects.requireNonNull(mAuth.getCurrentUser()).delete();
-        db.collection("users")
-                .whereEqualTo("user_id", currentUserID)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        // Get the reference to the document
-                        DocumentReference userRef = documentSnapshot.getReference();
-                        // Delete the user document
-                        userRef.delete()
-                                .addOnSuccessListener(aVoid -> Log.d(TAG, "User document deleted successfully"))
-                                .addOnFailureListener(e -> Log.w(TAG, "Error deleting user document", e));
-                    }
-                })
-                .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
     }
 
     @Override
