@@ -78,7 +78,7 @@ public class chat extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "I want to play 20 questions with you with me asking teh questions and you answering. The final person is Taylor Swift the world famous singer so you should answer questions with respect to her but never tell the user taylor swift(unless they guess it). You are on question number "+ question + " Remember if question number is 20 they lose. Respond to their questions with yes or no with respect to taylor swift along with what question number it is. Playfully taunt the user as well but remember to always respond truthfully while never telling the user the words taylor swift. Here is the user's question: " + userMessage);
+            jsonObjectMessage.put("content", "Act like Taylor Swift and respond to the following message: " + userMessage);
             question++;
             jsonArrayMessage.put(jsonObjectMessage);
 

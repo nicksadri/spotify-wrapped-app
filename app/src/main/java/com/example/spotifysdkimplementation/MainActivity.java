@@ -77,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.login_page);
 
-        Button loginPage = findViewById(R.id.button_prim);
+        logInButton = findViewById(R.id.button_prim);
         inputEmail = findViewById(R.id.input_email);
         inputPassword = findViewById(R.id.input_password);
         createAccount = findViewById((R.id.don_t_have_));
 
-        loginPage.setOnClickListener(v -> {
+        logInButton.setOnClickListener(v -> {
                 signInUser(inputEmail.getText().toString(), inputPassword.getText().toString());
         });
 
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "User Signed In",
                                 Toast.LENGTH_SHORT).show();
                         if (mAccessToken != null) {
-                            Intent intent = new Intent(MainActivity.this, TopArtistPage.class);
+                            Intent intent = new Intent(MainActivity.this, WrappedPage.class);
                             startActivity(intent);
                         }
                     } else {
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                             userRef.update("auth_code", mAccessCode)
                                     .addOnSuccessListener(aVoid -> {
                                         Log.d(TAG, "Auth code updated successfully");
-                                        Intent intent = new Intent(MainActivity.this, TopArtistPage.class);
+                                        Intent intent = new Intent(MainActivity.this, WrappedPage.class);
                                         startActivity(intent);
                                     })
                                     .addOnFailureListener(e -> Log.w(TAG, "Error updating auth code", e));

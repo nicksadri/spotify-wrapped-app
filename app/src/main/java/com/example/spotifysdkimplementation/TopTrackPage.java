@@ -90,7 +90,7 @@ public class TopTrackPage extends AppCompatActivity {
         trackNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TopTrackPage.this, ListeningTimePage.class);
+                Intent intent = new Intent(TopTrackPage.this, WrappedPage.class);
                 startActivity(intent);
             }
         });
@@ -214,7 +214,7 @@ public class TopTrackPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes Taylor Swift, Kanye, and Jay Z, what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
+            jsonObjectMessage.put("content", "If someone likes Shake it Off, Empire State of Mind, Keg in the Closet, Bad Blood, and Umbrella give them 5 song recommendations numbered 1 to 5 and only give those recommendations.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);

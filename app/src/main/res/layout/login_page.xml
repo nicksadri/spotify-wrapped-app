@@ -17,10 +17,10 @@
             android:id="@+id/log_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="158dp"
-            android:layout_marginBottom="650dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="160dp"
             android:gravity="center_horizontal|top"
             android:text="@string/log_in"
             android:textAppearance="@style/log_in" />

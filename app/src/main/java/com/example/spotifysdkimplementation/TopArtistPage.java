@@ -55,7 +55,7 @@ import okhttp3.Response;
 
 public class TopArtistPage extends AppCompatActivity {
 
-    private Button artistNext;
+    private Button artistNext, recomendationsButton;
 
     private String stringURLEndPoint = "https://api.openai.com/v1/chat/completions";
     private String stringAPIKey = "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";
@@ -89,9 +89,9 @@ public class TopArtistPage extends AppCompatActivity {
         imageView4 = findViewById(R.id.artistImage4);
         imageView5 = findViewById(R.id.artistImage5);
 
-        Button recommendationsButton = findViewById(R.id.artistsButton);
+        recomendationsButton = findViewById(R.id.artistsButton);
 
-        recommendationsButton.setOnClickListener(new View.OnClickListener() {
+        recomendationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Trigger the ChatGPT functionality
@@ -217,8 +217,8 @@ public class TopArtistPage extends AppCompatActivity {
                     setImageAsync(images.get(4), imageView5);
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top artists data: " + e);
-                    Toast.makeText(TopArtistPage.this, "Failed to parse top artists data, watch Logcat for more details",
-                            Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(TopArtistPage.this, "Failed to parse top artists data, watch Logcat for more details",
+//                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
