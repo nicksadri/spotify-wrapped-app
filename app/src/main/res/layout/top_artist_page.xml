@@ -33,50 +33,150 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="162dp"
-            android:layout_marginBottom="115dp"
+            android:layout_marginEnd="161dp"
+            android:layout_marginBottom="75dp"
             android:backgroundTint="@color/green"
             android:text="Next"
             android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/artistImage1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="136dp"
+            app:srcCompat="@drawable/spotifylogo" />
+
+        <ImageView
+            android:id="@+id/artistImage2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="222dp"
+            app:srcCompat="@drawable/spotifylogo" />
+
+        <ImageView
+            android:id="@+id/artistImage3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="309dp"
+            app:srcCompat="@drawable/spotifylogo" />
+
+        <ImageView
+            android:id="@+id/artistImage4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="396dp"
+            app:srcCompat="@drawable/spotifylogo" />
+
+        <ImageView
+            android:id="@+id/artistImage5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="118dp"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="483dp"
+            app:srcCompat="@drawable/spotifylogo" />
+
+        <TextView
+            android:id="@+id/artists_num1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="147dp"
+            android:gravity="center_horizontal|top"
+            android:text="#1"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artistName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="147dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/artistName1"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artists_num2_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="233dp"
+            android:gravity="center_horizontal|top"
+            android:text="#2"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artistName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="233dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/artistName2"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artists_num3_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="324dp"
+            android:gravity="center_horizontal|top"
+            android:text="#3"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artistName3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="324dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/artistName3"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artists_num5_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="501dp"
+            android:gravity="center_horizontal|top"
+            android:text="#5"
+            android:textAppearance="@style/top_artists_attributes" />
+
+        <TextView
+            android:id="@+id/artistName5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="501dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/artistName5"
+            android:textAppearance="@style/top_artists_attributes" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/artists_num1_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="180dp"
-        android:text="#1"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
-
-    <TextView
-        android:id="@+id/artists_num2_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="258dp"
-        android:text="#2"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
-    <TextView
-        android:id="@+id/artists_num3_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="336dp"
-        android:text="#3"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
     <TextView
         android:id="@+id/artists_num4_text"
         android:layout_width="wrap_content"
@@ -89,78 +189,18 @@
         android:textAppearance="@style/top_artists_attributes"
         android:gravity="center_horizontal|top"
         />
-    <TextView
-        android:id="@+id/artists_num5_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="492dp"
-        android:text="#5"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
-    <TextView
-        android:id="@+id/artistName1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="180dp"
-        android:text="@string/artistName1"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
 
-    <TextView
-        android:id="@+id/artistName2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="258dp"
-        android:text="@string/artistName2"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
-
-    <TextView
-        android:id="@+id/artistName3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="336dp"
-        android:text="@string/artistName3"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
     <TextView
         android:id="@+id/artistName4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
+        android:layout_marginLeft="225dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="414dp"
         android:text="@string/artistName4"
         android:textAppearance="@style/top_artists_attributes"
         android:gravity="center_horizontal|top"
         />
-    <TextView
-        android:id="@+id/artistName5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="492dp"
-        android:text="@string/artistName5"
-        android:textAppearance="@style/top_artists_attributes"
-        android:gravity="center_horizontal|top"
-        />
+
 </RelativeLayout>
