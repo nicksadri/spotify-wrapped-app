@@ -39,6 +39,18 @@
             android:text="Next"
             android:textColor="@color/black" />
 
+        <Button
+            android:id="@+id/artistsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="127dp"
+            android:layout_marginBottom="21dp"
+            android:backgroundTint="@color/green"
+            android:text="About You LLM"
+            android:textColor="@color/black" />
+
         <ImageView
             android:id="@+id/artistImage1"
             android:layout_width="80dp"
