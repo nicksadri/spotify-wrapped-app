@@ -24,21 +24,19 @@
             android:layout_marginTop="36dp"
             android:layout_marginEnd="120dp"
             android:gravity="center_horizontal|top"
-            android:text="Top Tracks"
+            android:text="Top Albums"
             android:textAppearance="@style/top_tracks" />
 
         <Button
             android:id="@+id/tracksNextButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
+            android:layout_above="@+id/artistsButton"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="162dp"
-            android:layout_marginTop="570dp"
             android:layout_marginEnd="161dp"
-            android:layout_marginBottom="114dp"
+            android:layout_marginBottom="22dp"
             android:backgroundTint="@color/green"
             android:text="Next"
             android:textColor="@color/black" />
@@ -48,16 +46,74 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="130dp"
-            android:layout_marginTop="640dp"
             android:layout_marginEnd="125dp"
             android:layout_marginBottom="43dp"
             android:backgroundTint="@color/green"
             android:text="Reccomendation"
             android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/trackName1"
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="225dp"
+            android:layout_marginLeft="246dp"
+            android:layout_marginTop="157dp"
+            android:layout_marginEnd="38dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/trackName1"
+            android:textAppearance="@style/top_tracks_attributes"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/tracks_num1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="153dp"
+            android:gravity="center_horizontal|top"
+            android:text="#1"
+            android:textAppearance="@style/top_tracks_attributes" />
+
+        <TextView
+            android:id="@+id/tracks_num2_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="244dp"
+            android:gravity="center_horizontal|top"
+            android:text="#2"
+            android:textAppearance="@style/top_tracks_attributes" />
+
+        <TextView
+            android:id="@+id/trackName2"
+            android:layout_width="147dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="223dp"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="246dp"
+            android:layout_marginEnd="41dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/trackName2"
+            android:textAppearance="@style/top_tracks_attributes"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/tracks_num3_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="327dp"
+            android:gravity="center_horizontal|top"
+            android:text="#3"
+            android:textAppearance="@style/top_tracks_attributes" />
     </RelativeLayout>
 
     <ImageView
@@ -116,43 +172,6 @@
         app:srcCompat="@drawable/spotifylogo" />
 
     <TextView
-        android:id="@+id/tracks_num1_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="180dp"
-        android:text="#1"
-        android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
-
-    <TextView
-        android:id="@+id/tracks_num2_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="258dp"
-        android:text="#2"
-        android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
-    <TextView
-        android:id="@+id/tracks_num3_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="336dp"
-        android:text="#3"
-        android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
-    <TextView
         android:id="@+id/tracks_num4_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -176,66 +195,55 @@
         android:textAppearance="@style/top_tracks_attributes"
         android:gravity="center_horizontal|top"
         />
-    <TextView
-        android:id="@+id/trackName1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="180dp"
-        android:text="@string/trackName1"
-        android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
-
-    <TextView
-        android:id="@+id/trackName2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="258dp"
-        android:text="@string/trackName2"
-        android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
 
     <TextView
         android:id="@+id/trackName3"
-        android:layout_width="wrap_content"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="226dp"
+        android:layout_marginLeft="226dp"
         android:layout_marginTop="336dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center_horizontal|top"
         android:text="@string/trackName3"
         android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
+        android:textSize="25dp" />
+
     <TextView
         android:id="@+id/trackName4"
-        android:layout_width="wrap_content"
+        android:layout_width="143dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="226dp"
+        android:layout_marginLeft="226dp"
         android:layout_marginTop="414dp"
+        android:layout_marginEnd="42dp"
+        android:gravity="center_horizontal|top"
         android:text="@string/trackName4"
         android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
+        android:textSize="25dp" />
+
     <TextView
         android:id="@+id/trackName5"
-        android:layout_width="wrap_content"
+        android:layout_width="146dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="226dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="226dp"
+        android:layout_marginLeft="226dp"
         android:layout_marginTop="492dp"
+        android:layout_marginEnd="39dp"
+        android:gravity="center_horizontal|top"
         android:text="@string/trackName5"
         android:textAppearance="@style/top_tracks_attributes"
-        android:gravity="center_horizontal|top"
-        />
+        android:textSize="25dp" />
 </RelativeLayout>
