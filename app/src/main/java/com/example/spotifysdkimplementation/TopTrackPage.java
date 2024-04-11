@@ -6,6 +6,8 @@ import static com.example.spotifysdkimplementation.MainActivity.CLIENT_ID;
 import static com.example.spotifysdkimplementation.MainActivity.getRedirectUri;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,7 +41,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,6 +54,9 @@ import okhttp3.Response;
 public class TopTrackPage extends AppCompatActivity {
 
     private Button trackNext;
+
+    private String stringURLEndPoint = "https://api.openai.com/v1/chat/completions";
+    private String stringAPIKey = "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";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -81,6 +95,16 @@ public class TopTrackPage extends AppCompatActivity {
             }
         });
         getTrackAsList();
+
+        Button recommendationsButton = findViewById(R.id.artistsButton);
+
+        recommendationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Trigger the ChatGPT functionality
+                buttonChatGPT(v);
+            }
+        });
     }
 
     private void cancelCall() {
@@ -182,5 +206,79 @@ public class TopTrackPage extends AppCompatActivity {
                     .into(imageView);
         });
 
+    }
+    public void buttonChatGPT(View view){
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("model", "gpt-3.5-turbo");
+
+            JSONArray jsonArrayMessage = new JSONArray();
+            JSONObject jsonObjectMessage = new JSONObject();
+            jsonObjectMessage.put("role", "user");
+            jsonObjectMessage.put("content", "If someone likes Taylor Swift, Kanye, and Jay Z, what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
+            jsonArrayMessage.put(jsonObjectMessage);
+
+            jsonObject.put("messages", jsonArrayMessage);
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(com.android.volley.Request.Method.POST,
+                stringURLEndPoint, jsonObject, new com.android.volley.Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                String stringText = null;
+                try {
+                    stringText = response.getJSONArray("choices")
+                            .getJSONObject(0)
+                            .getJSONObject("message")
+                            .getString("content");
+                    showPopup(stringText);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error response
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> mapHeader = new HashMap<>();
+                mapHeader.put("Authorization", "Bearer " + stringAPIKey);
+                mapHeader.put("Content-Type", "application/json");
+
+                return mapHeader;
+            }
+
+            @Override
+            protected com.android.volley.Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        int intTimeoutPeriod = 60000; // 60 seconds timeout duration defined
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(intTimeoutPeriod,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsonObjectRequest.setRetryPolicy(retryPolicy);
+        Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
+    }
+
+    private void showPopup(String message) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(message);
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing, or you can add functionality if needed
+            }
+        });
+        alertDialogBuilder.create().show();
     }
 }
