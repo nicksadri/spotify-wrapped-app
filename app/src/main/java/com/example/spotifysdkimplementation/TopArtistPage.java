@@ -231,7 +231,6 @@ public class TopArtistPage extends AppCompatActivity {
         final AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
 
         if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
-            Log.d("Top artist page token", response.getAccessToken());
             MainActivity.mAccessToken = response.getAccessToken();
 
             db.collection("users")
