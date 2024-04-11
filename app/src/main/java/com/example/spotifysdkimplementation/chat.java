@@ -78,7 +78,7 @@ public class chat extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "Act like Taylor Swift and respond to the following message: " + userMessage);
+            jsonObjectMessage.put("content", "Act like Kanye West and respond to the following message: " + userMessage);
             question++;
             jsonArrayMessage.put(jsonObjectMessage);
 

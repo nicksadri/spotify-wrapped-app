@@ -3,6 +3,7 @@ package com.example.spotifysdkimplementation;
 import static android.content.ContentValues.TAG;
 import static com.example.spotifysdkimplementation.MainActivity.AUTH_TOKEN_REQUEST_CODE;
 import static com.example.spotifysdkimplementation.MainActivity.CLIENT_ID;
+import static com.example.spotifysdkimplementation.MainActivity.currentUserID;
 import static com.example.spotifysdkimplementation.MainActivity.getRedirectUri;
 
 import android.app.AlertDialog;
@@ -34,8 +35,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -192,6 +191,7 @@ public class TopArtistPage extends AppCompatActivity {
                     final JSONObject jsonObject = new JSONObject(response.body().string());
                     JSONArray artistsArray = jsonObject.getJSONArray("items");
                     List<String> images = new ArrayList<>();
+
                     for (int i = 0; i < 5; i++) {
                         JSONObject artist = artistsArray.getJSONObject(i);
                         String artistName = artist.getString("name");
@@ -215,6 +215,12 @@ public class TopArtistPage extends AppCompatActivity {
                     setImageAsync(images.get(2), imageView3);
                     setImageAsync(images.get(3), imageView4);
                     setImageAsync(images.get(4), imageView5);
+
+                    Map<String, Object> historyData = new HashMap<>();
+                    historyData.put("topArtistsList", topArtistsList);
+                    historyData.put("images", images);
+                    updateHistoryArtists(historyData);
+
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top artists data: " + e);
 //                    Toast.makeText(TopArtistPage.this, "Failed to parse top artists data, watch Logcat for more details",
@@ -309,7 +315,7 @@ public class TopArtistPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes Taylor Swift, Kanye, and Jay Z, what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
+            jsonObjectMessage.put("content", "If someone likes Kanye West, Drake, Travis Scott, and 21 Savage, what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);
@@ -374,4 +380,25 @@ public class TopArtistPage extends AppCompatActivity {
         });
         alertDialogBuilder.create().show();
     }
+
+    private void updateHistoryArtists(Map<String, Object> historyData) {
+        db.collection("users")
+                .whereEqualTo("user_id", currentUserID)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        // Get the reference to the document
+                        DocumentReference userRef = documentSnapshot.getReference();
+
+                        // Now update the auth_code field for this user document
+                        userRef.update("history", historyData)
+                                .addOnSuccessListener(aVoid -> {
+                                    Log.d(TAG, "History updated successfully");
+                                })
+                                .addOnFailureListener(e -> Log.w(TAG, "Error updating auth code", e));
+                    }
+                })
+                .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
+    }
+
 }

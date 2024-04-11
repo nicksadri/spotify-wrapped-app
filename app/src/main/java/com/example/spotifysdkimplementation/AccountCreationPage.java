@@ -97,6 +97,7 @@ public class AccountCreationPage extends AppCompatActivity {
                         user.put("user_id", MainActivity.currentUserID);
                         user.put("api_token", null);
                         user.put("refresh_token", null);
+                        user.put("history", null);
 
                         db.collection("users")
                                 .add(user)

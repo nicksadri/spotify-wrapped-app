@@ -3,6 +3,7 @@ package com.example.spotifysdkimplementation;
 import static android.content.ContentValues.TAG;
 import static com.example.spotifysdkimplementation.MainActivity.AUTH_TOKEN_REQUEST_CODE;
 import static com.example.spotifysdkimplementation.MainActivity.CLIENT_ID;
+import static com.example.spotifysdkimplementation.MainActivity.currentUserID;
 import static com.example.spotifysdkimplementation.MainActivity.getRedirectUri;
 
 import android.app.Activity;
@@ -166,6 +167,12 @@ public class TopTrackPage extends AppCompatActivity {
                     setImageAsync(images.get(2), imageView3);
                     setImageAsync(images.get(3), imageView4);
                     setImageAsync(images.get(4), imageView5);
+
+                    Map<String, Object> historyData = new HashMap<>();
+                    historyData.put("topArtistsList", topTracksList);
+                    historyData.put("images", images);
+                    updateHistoryTracks(historyData);
+
                 } catch (JSONException e) {
                     Log.d("JSON", "Failed to parse top tracks data: " + e);
                     Toast.makeText(TopTrackPage.this, "Failed to parse top tracks data, watch Logcat for more details",
@@ -214,7 +221,7 @@ public class TopTrackPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes Shake it Off, Empire State of Mind, Keg in the Closet, Bad Blood, and Umbrella give them 5 song recommendations numbered 1 to 5 and only give those recommendations.");
+            jsonObjectMessage.put("content", "If someone likes Carnival by Kanye, Jimmy Cooks, Wolves, IDGAF, and My Eyes, give them 5 song recommendations numbered 1 to 5 and only give those recommendations.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);
@@ -279,4 +286,26 @@ public class TopTrackPage extends AppCompatActivity {
         });
         alertDialogBuilder.create().show();
     }
+
+    private void updateHistoryTracks(Map<String, Object> historyData) {
+        db.collection("users")
+                .whereEqualTo("user_id", currentUserID)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        // Get the reference to the document
+                        DocumentReference userRef = documentSnapshot.getReference();
+
+                        // Now update the auth_code field for this user document
+                        userRef.update("history", historyData)
+                                .addOnSuccessListener(aVoid -> {
+                                    Log.d(TAG, "History updated successfully");
+                                })
+                                .addOnFailureListener(e -> Log.w(TAG, "Error updating auth code", e));
+                    }
+                })
+                .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
+    }
+
+
 }

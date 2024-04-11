@@ -16,12 +16,17 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.spotifysdkimplementation.databinding.ChangePasswordPageBinding;
 import com.example.spotifysdkimplementation.databinding.LoginPageBinding;
 import com.example.spotifysdkimplementation.databinding.LoginPageBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ChangePasswordPage extends AppCompatActivity {
     private ChangePasswordPageBinding binding;
 
     private Button confirm, cancel;
     private EditText oldPass, newPass, confPass;
+
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,10 @@ public class ChangePasswordPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void changePassword() {
+
     }
 
 }
