@@ -66,8 +66,6 @@ public class AccountInfoPage extends AppCompatActivity {
                 Uri uri = Uri.parse("https://accounts.spotify.com/");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
-                Intent intent = new Intent(AccountInfoPage.this, MainActivity.class);
-                startActivity(intent);
             }
         });
 

@@ -50,7 +50,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String CLIENT_ID = "d857953ebaca4345b0be666d38a4037c";
+    public static final String CLIENT_ID = "ee7c53535b48455d87206643081267e2";
     public static final String REDIRECT_URI = "spotifysdkimplementation://auth";
 
     public static final int AUTH_TOKEN_REQUEST_CODE = 0;
@@ -83,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
         createAccount = findViewById((R.id.don_t_have_));
 
         loginPage.setOnClickListener(v -> {
-            signInUser(inputEmail.getText().toString(), inputPassword.getText().toString());
-
+                signInUser(inputEmail.getText().toString(), inputPassword.getText().toString());
         });
 
 //        createAccount.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +130,10 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, "User Signed In",
                                 Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, TopArtistPage.class);
-                        startActivity(intent);
+                        if (mAccessToken != null) {
+                            Intent intent = new Intent(MainActivity.this, TopArtistPage.class);
+                            startActivity(intent);
+                        }
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -212,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
     }
 
     /**
@@ -236,7 +236,6 @@ public class MainActivity extends AppCompatActivity {
         final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.CODE);
         AuthorizationClient.openLoginActivity(MainActivity.this, AUTH_CODE_REQUEST_CODE, request);
     }
-
 
     /**
      * When the app leaves this activity to momentarily get a token/code, this function
@@ -267,14 +266,16 @@ public class MainActivity extends AppCompatActivity {
 
                             // Now update the auth_code field for this user document
                             userRef.update("auth_code", mAccessCode)
-                                    .addOnSuccessListener(aVoid -> Log.d(TAG, "Auth code updated successfully"))
+                                    .addOnSuccessListener(aVoid -> {
+                                        Log.d(TAG, "Auth code updated successfully");
+                                        Intent intent = new Intent(MainActivity.this, TopArtistPage.class);
+                                        startActivity(intent);
+                                    })
                                     .addOnFailureListener(e -> Log.w(TAG, "Error updating auth code", e));
                         }
                     })
                     .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
         }
-        Intent intent = new Intent(MainActivity.this, WrappedPage.class);
-        startActivity(intent);
 
     }
 

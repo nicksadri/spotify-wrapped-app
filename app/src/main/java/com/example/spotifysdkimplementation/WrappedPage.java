@@ -69,56 +69,6 @@ public class WrappedPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        setToken();
     }
 
-    /**
-     * Get authentication request
-     *
-     * @param type the type of the request
-     * @return the authentication request
-     */
-    private AuthorizationRequest getAuthenticationRequest(AuthorizationResponse.Type type) {
-        return new AuthorizationRequest.Builder(CLIENT_ID, type, getRedirectUri().toString())
-                .setShowDialog(false)
-                .setScopes(new String[] { "user-read-email", "user-top-read" }) // <--- Change the scope of your requested token here
-                .setCampaign("your-campaign-token")
-                .build();
-    }
-
-    public void setToken() {
-        final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.TOKEN);
-        AuthorizationClient.openLoginActivity(WrappedPage.this, AUTH_TOKEN_REQUEST_CODE, request);
-    }
-
-    /**
-     * When the app leaves this activity to momentarily get a token/code, this function
-     * fetches the result of that external activity to get the response from Spotify
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        final AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
-
-        if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
-            Log.d("Wrapped page", response.getAccessToken());
-            MainActivity.mAccessToken = response.getAccessToken();
-
-            db.collection("users")
-                    .whereEqualTo("user_id", MainActivity.currentUserID)
-                    .get()
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            // Get the reference to the document
-                            DocumentReference userRef = documentSnapshot.getReference();
-
-                            // Now update the auth_code field for this user document
-                            userRef.update("api_token", response.getAccessToken())
-                                    .addOnSuccessListener(aVoid -> Log.d(TAG, "api token updated successfully"))
-                                    .addOnFailureListener(e -> Log.w(TAG, "Error updating api token", e));
-                        }
-                    })
-                    .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
-        }
-    }
 }
