@@ -157,11 +157,36 @@ public class TopTrackPage extends AppCompatActivity {
                             images.add(imageUrl);
                         }
                     }
-                    setTextAsync(topTracksList.get(0), track1Name);
-                    setTextAsync(topTracksList.get(1), track2Name);
-                    setTextAsync(topTracksList.get(2), track3Name);
-                    setTextAsync(topTracksList.get(3), track4Name);
-                    setTextAsync(topTracksList.get(4), track5Name);
+                    if (topTracksList.get(0).length() > 15) {
+                        setTextAsync(topTracksList.get(0).substring(0, 15), track1Name);
+                    } else {
+                        setTextAsync(topTracksList.get(0), track1Name);
+                    }
+                    if (topTracksList.get(1).length() > 15) {
+                        setTextAsync(topTracksList.get(1).substring(0, 15), track2Name);
+                    } else {
+                        setTextAsync(topTracksList.get(1), track2Name);
+                    }
+                    if (topTracksList.get(2).length() > 15) {
+                        setTextAsync(topTracksList.get(2).substring(0, 15), track3Name);
+                    } else {
+                        setTextAsync(topTracksList.get(2), track3Name);
+                    }
+                    if (topTracksList.get(3).length() > 15) {
+                        setTextAsync(topTracksList.get(3).substring(0, 15), track4Name);
+                    } else {
+                        setTextAsync(topTracksList.get(3), track4Name);
+                    }
+                    if (topTracksList.get(4).length() > 15) {
+                        setTextAsync(topTracksList.get(4).substring(0, 15), track5Name);
+                    } else {
+                        setTextAsync(topTracksList.get(4), track5Name);
+                    }
+
+//                    setTextAsync(topTracksList.get(1), track2Name);
+//                    setTextAsync(topTracksList.get(2), track3Name);
+//                    setTextAsync(topTracksList.get(3), track4Name);
+//                    setTextAsync(topTracksList.get(4), track5Name);
                     setImageAsync(images.get(0), imageView1);
                     setImageAsync(images.get(1), imageView2);
                     setImageAsync(images.get(2), imageView3);

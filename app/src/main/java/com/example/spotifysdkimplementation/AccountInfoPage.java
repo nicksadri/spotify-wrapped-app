@@ -35,7 +35,7 @@ public class AccountInfoPage extends AppCompatActivity {
     private AccountInfoPageBinding binding;
 
     private Button changeUser, changePass, deleteAccount;
-    private TextView logout;
+    private TextView logout, returnFromAccount;
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -49,6 +49,7 @@ public class AccountInfoPage extends AppCompatActivity {
         changePass = findViewById(R.id.change_password_button);
         deleteAccount = findViewById(R.id.delete_account_button);
         logout = findViewById(R.id.logout);
+        returnFromAccount = findViewById(R.id.returnToMainButton);
 
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +83,14 @@ public class AccountInfoPage extends AppCompatActivity {
                 Uri uri = Uri.parse("https://accounts.spotify.com/");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
+            }
+        });
+
+        returnFromAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountInfoPage.this, WrappedPage.class);
+                startActivity(intent);
             }
         });
 
