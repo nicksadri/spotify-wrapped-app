@@ -145,7 +145,6 @@ public class TopArtistPage extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     Log.d("Successful:", "response sent");
-                    Log.d("json response: ", response.body().string());
 
                     final JSONObject jsonObject = new JSONObject(response.body().string());
                     JSONArray artistsArray = jsonObject.getJSONArray("items");
