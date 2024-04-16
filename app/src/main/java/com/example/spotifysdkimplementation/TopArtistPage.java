@@ -205,11 +205,31 @@ public class TopArtistPage extends AppCompatActivity {
                             images.add(imageUrl);
                         }
                     }
-                    setTextAsync(topArtistsList.get(0), artist1Name);
-                    setTextAsync(topArtistsList.get(1), artist2Name);
-                    setTextAsync(topArtistsList.get(2), artist3Name);
-                    setTextAsync(topArtistsList.get(3), artist4Name);
-                    setTextAsync(topArtistsList.get(4), artist5Name);
+                    if (topArtistsList.get(0).length() > 15) {
+                        setTextAsync(topArtistsList.get(0).substring(0,14), artist1Name);
+                    } else {
+                        setTextAsync(topArtistsList.get(0), artist1Name);
+                    }
+                    if (topArtistsList.get(1).length() > 15) {
+                        setTextAsync(topArtistsList.get(1).substring(0,14), artist2Name);
+                    } else {
+                        setTextAsync(topArtistsList.get(1), artist2Name);
+                    }
+                    if (topArtistsList.get(2).length() > 15) {
+                        setTextAsync(topArtistsList.get(2).substring(0,14), artist3Name);
+                    } else {
+                        setTextAsync(topArtistsList.get(2), artist3Name);
+                    }
+                    if (topArtistsList.get(3).length() > 15) {
+                        setTextAsync(topArtistsList.get(3).substring(0,14), artist4Name);
+                    } else {
+                        setTextAsync(topArtistsList.get(3), artist4Name);
+                    }
+                    if (topArtistsList.get(4).length() > 15) {
+                        setTextAsync(topArtistsList.get(4).substring(0,14), artist5Name);
+                    } else {
+                        setTextAsync(topArtistsList.get(4), artist5Name);
+                    }
                     setImageAsync(images.get(0), imageView1);
                     setImageAsync(images.get(1), imageView2);
                     setImageAsync(images.get(2), imageView3);
