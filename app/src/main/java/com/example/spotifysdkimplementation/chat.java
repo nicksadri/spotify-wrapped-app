@@ -71,6 +71,7 @@ public class chat extends AppCompatActivity {
         mEditText.getText().clear();
 
         JSONObject jsonObject = new JSONObject();
+        String topArtist = TopArtistPage.getTopArtistChat();
 
         try {
             jsonObject.put("model", "gpt-3.5-turbo");
@@ -78,7 +79,7 @@ public class chat extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "Act like Kanye West and respond to the following message: " + userMessage);
+            jsonObjectMessage.put("content", "Act like" + topArtist + "and respond to the following message: " + userMessage);
             question++;
             jsonArrayMessage.put(jsonObjectMessage);
 

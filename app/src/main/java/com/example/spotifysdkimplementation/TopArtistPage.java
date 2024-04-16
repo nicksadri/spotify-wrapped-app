@@ -66,6 +66,8 @@ public class TopArtistPage extends AppCompatActivity {
     private TextView artist1Name, artist2Name, artist3Name, artist4Name, artist5Name;
 
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5;
+    private static String topArtistChat;
+    private List<String> topArtistsRecommend;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
@@ -205,6 +207,8 @@ public class TopArtistPage extends AppCompatActivity {
                             images.add(imageUrl);
                         }
                     }
+                    topArtistsRecommend = topArtistsList;
+                    topArtistChat = topArtistsList.get(0);
                     if (topArtistsList.get(0).length() > 15) {
                         setTextAsync(topArtistsList.get(0).substring(0,14), artist1Name);
                     } else {
@@ -250,6 +254,10 @@ public class TopArtistPage extends AppCompatActivity {
         });
 
         return topArtistsList;
+    }
+
+    public static String getTopArtistChat() {
+        return topArtistChat;
     }
 
 
@@ -335,7 +343,7 @@ public class TopArtistPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes Kanye West, Drake, Travis Scott, and 21 Savage, what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
+            jsonObjectMessage.put("content", "If someone likes " + topArtistChat + ", " + topArtistsRecommend.get(1) + ", and " + topArtistsRecommend.get(2) +  ", what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);

@@ -67,6 +67,7 @@ public class TopTrackPage extends AppCompatActivity {
     private TextView track1Name, track2Name, track3Name, track4Name, track5Name;
 
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5;
+    private static List<String> topTracks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,7 @@ public class TopTrackPage extends AppCompatActivity {
                             images.add(imageUrl);
                         }
                     }
+                    topTracks = topTracksList;
                     if (topTracksList.get(0).length() > 15) {
                         setTextAsync(topTracksList.get(0).substring(0, 15), track1Name);
                     } else {
@@ -210,7 +212,9 @@ public class TopTrackPage extends AppCompatActivity {
     }
 
 
-
+    public static List<String> getTopTracksRecommend() {
+        return topTracks;
+    }
 
 
     /**
@@ -246,7 +250,7 @@ public class TopTrackPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes Carnival by Kanye, Jimmy Cooks, Wolves, IDGAF, and My Eyes, give them 5 song recommendations numbered 1 to 5 and only give those recommendations.");
+            jsonObjectMessage.put("content", "If someone likes " + topTracks.get(0) + ", " + topTracks.get(1) + ", " + topTracks.get(2) + ", " + topTracks.get(3) + ", " + topTracks.get(4) + ", give them 5 song recommendations numbered 1 to 5 and only give those recommendations.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);
