@@ -196,7 +196,7 @@ public class TopTrackPage extends AppCompatActivity {
                     setImageAsync(images.get(4), imageView5);
 
                     Map<String, Object> historyData = new HashMap<>();
-                    historyData.put("topArtistsList", topTracksList);
+                    historyData.put("topTrackList", topTracksList);
                     historyData.put("images", images);
                     updateHistoryTracks(historyData);
 
