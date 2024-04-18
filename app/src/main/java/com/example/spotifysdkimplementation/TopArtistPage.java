@@ -419,7 +419,7 @@ public class TopArtistPage extends AppCompatActivity {
                         DocumentReference userRef = documentSnapshot.getReference();
 
                         // Now update the auth_code field for this user document
-                        userRef.update("history", historyData)
+                        userRef.update("top_artist_history", historyData)
                                 .addOnSuccessListener(aVoid -> {
                                     Log.d(TAG, "History updated successfully");
                                 })
