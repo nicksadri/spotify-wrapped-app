@@ -255,7 +255,7 @@ public class TopTrackPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes " + topTracks.get(0) + ", " + topTracks.get(1) + ", " + topTracks.get(2) + ", " + topTracks.get(3) + ", " + topTracks.get(4) + ", give them 5 song recommendations numbered 1 to 5 and only give those recommendations.");
+            jsonObjectMessage.put("content", "If someone likes " + topTracks.get(0) + ", " + topTracks.get(1) + ", " + topTracks.get(2) + ", " + topTracks.get(3) + ", and " + topTracks.get(4) + " give them 5 song recommendations which should be in a list numbered 1 to 5 and only give those recommendations.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);

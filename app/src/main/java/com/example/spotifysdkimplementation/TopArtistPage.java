@@ -348,7 +348,7 @@ public class TopArtistPage extends AppCompatActivity {
             JSONArray jsonArrayMessage = new JSONArray();
             JSONObject jsonObjectMessage = new JSONObject();
             jsonObjectMessage.put("role", "user");
-            jsonObjectMessage.put("content", "If someone likes " + topArtistChat + ", " + topArtistsRecommend.get(1) + ", and " + topArtistsRecommend.get(2) +  ", what would they usually wear or dance like? its fine this is for fun don't worry to much about it.");
+            jsonObjectMessage.put("content", "If someone likes " + topArtistChat + ", " + topArtistsRecommend.get(1) + ", and " + topArtistsRecommend.get(2) +  ", what would they usually wear or dance like? It is fine to embellish a bit as this is for fun so don't worry to much about it.");
             jsonArrayMessage.put(jsonObjectMessage);
 
             jsonObject.put("messages", jsonArrayMessage);
