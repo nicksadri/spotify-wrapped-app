@@ -69,6 +69,8 @@ public class TopTrackPage extends AppCompatActivity {
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5;
     private static List<String> topTracks;
 
+    private static ArrayList<String> previousTopTracks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +119,7 @@ public class TopTrackPage extends AppCompatActivity {
 
     public List<String> getTrackAsList() {
         List<String> topTracksList = new ArrayList<>();
+        previousTopTracks = new ArrayList<>();
 
         if (MainActivity.mAccessToken == null) {
             Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
@@ -161,8 +164,10 @@ public class TopTrackPage extends AppCompatActivity {
                     topTracks = topTracksList;
                     if (topTracksList.get(0).length() > 15) {
                         setTextAsync(topTracksList.get(0).substring(0, 15), track1Name);
+                        previousTopTracks.add(topTracksList.get(0).substring(0, 15));
                     } else {
                         setTextAsync(topTracksList.get(0), track1Name);
+                        previousTopTracks.add(topTracksList.get(0));
                     }
                     if (topTracksList.get(1).length() > 15) {
                         setTextAsync(topTracksList.get(1).substring(0, 15), track2Name);
@@ -336,5 +341,8 @@ public class TopTrackPage extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
     }
 
+    public static ArrayList<String> getPreviousTopTracks() {
+        return previousTopTracks;
+    }
 
 }

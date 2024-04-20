@@ -21,9 +21,17 @@
         android:textAppearance="@style/wrapped_his" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/wrappedRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="492dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="137dp" />
+
+    <Button
+        android:id="@+id/backButtonHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="returnHome"
+        android:text="Return" />
 
 </RelativeLayout>
