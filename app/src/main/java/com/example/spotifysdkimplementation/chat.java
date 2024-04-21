@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,7 @@ public class chat extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private MessageAdapter mAdapter;
     private EditText mEditText;
-    private Button mButton;
+    private Button mButton, exitChatButton;
     private String apiUrl = "https://api.openai.com/v1/chat/completions";
     private String accessToken = "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";
     private int question = 1;
@@ -47,6 +48,7 @@ public class chat extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
         mEditText = findViewById(R.id.edit_text);
         mButton = findViewById(R.id.button);
+        exitChatButton = findViewById(R.id.button2);
 
         mMessages = new ArrayList<>();
         mAdapter = new MessageAdapter(mMessages);
@@ -58,6 +60,14 @@ public class chat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 callAPI();
+            }
+        });
+
+        exitChatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(chat.this, WrappedPage.class);
+                startActivity(intent);
             }
         });
     }
