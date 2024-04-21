@@ -35,7 +35,7 @@ public class AccountInfoPage extends AppCompatActivity {
     private AccountInfoPageBinding binding;
 
     private Button changeUser, changePass, deleteAccount;
-    private TextView logout, returnFromAccount;
+    private TextView logout, returnFromAccount, userName;
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -50,6 +50,8 @@ public class AccountInfoPage extends AppCompatActivity {
         deleteAccount = findViewById(R.id.delete_account_button);
         logout = findViewById(R.id.logout);
         returnFromAccount = findViewById(R.id.returnToMainButton);
+        userName = findViewById(R.id.username);
+        userName.setText(currentUser.getDisplayName());
 
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
