@@ -44,14 +44,14 @@ public class AccountInfoPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_info_page);
-
+        mAuth = FirebaseAuth.getInstance();
         changeUser = findViewById(R.id.change_username_button);
         changePass = findViewById(R.id.change_password_button);
         deleteAccount = findViewById(R.id.delete_account_button);
         logout = findViewById(R.id.logout);
         returnFromAccount = findViewById(R.id.returnToMainButton);
         userName = findViewById(R.id.username);
-        userName.setText(currentUser.getDisplayName());
+        userName.setText(mAuth.getCurrentUser().getEmail());
 
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
