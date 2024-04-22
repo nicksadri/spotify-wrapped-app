@@ -11,24 +11,26 @@
         android:layout_width="345dp"
         android:layout_height="89dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="33dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="60dp"
-        android:text="@string/click_for_wrapped"
-        android:textAppearance="@style/click_below"
+        android:layout_marginEnd="20dp"
         android:gravity="center_horizontal|top"
-        />
+        android:text="@string/click_for_wrapped"
+        android:textAppearance="@style/click_below" />
 
     <View
         android:id="@+id/wrapped_art"
         android:layout_width="307dp"
         android:layout_height="307dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="52dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="52dp"
         android:layout_marginTop="215dp"
-        android:background="@drawable/wrapped_art"
-        />
+        android:layout_marginEnd="52dp"
+        android:background="@drawable/wrapped_art" />
 
     <Button
         android:id="@+id/previous_wrapped_button"
@@ -53,7 +55,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="85dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginEnd="85dp"
         android:layout_marginBottom="43dp"
         android:backgroundTint="@color/green"
         android:gravity="center_horizontal|top"

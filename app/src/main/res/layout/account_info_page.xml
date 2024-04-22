@@ -53,25 +53,16 @@
         android:background="@drawable/spotifylogo" />
 
     <TextView
-        android:id="@+id/usernameHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="280dp"
-        android:gravity="center_horizontal|top"
-        android:text="Username:"
-        android:textAppearance="@style/george_burd" />
-
-    <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="340dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="0dp"
         android:gravity="center_horizontal|top"
         android:text="@string/george_burd"
         android:textAppearance="@style/george_burd" />
@@ -80,20 +71,24 @@
         android:id="@+id/change_username_button"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="98dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="246dp"
         android:backgroundTint="#1ED760"
-        android:text="Change Username" />
+        android:text="Change Email" />
 
     <Button
         android:id="@+id/change_password_button"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="95dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="163dp"
         android:backgroundTint="#1ED760"
         android:text="Change Password" />
@@ -102,9 +97,11 @@
         android:id="@+id/delete_account_button"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="95dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="86dp"
         android:backgroundTint="#000000"
         android:text="Delete Account" />
