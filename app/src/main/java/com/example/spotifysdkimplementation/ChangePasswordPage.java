@@ -52,6 +52,8 @@ public class ChangePasswordPage extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.getCurrentUser().updatePassword(newPass.getText().toString());
+                    Toast.makeText(ChangePasswordPage.this, "Password changed.",
+                            Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(ChangePasswordPage.this, AccountInfoPage.class);
                 startActivity(intent);

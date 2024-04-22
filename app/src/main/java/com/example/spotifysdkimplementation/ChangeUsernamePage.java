@@ -52,6 +52,8 @@ public class ChangeUsernamePage extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     mAuth.getCurrentUser().verifyBeforeUpdateEmail(newUser.getText().toString());
+                    Toast.makeText(ChangeUsernamePage.this, "Check your email.",
+                            Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(ChangeUsernamePage.this, AccountInfoPage.class);
                 startActivity(intent);

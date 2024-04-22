@@ -37,7 +37,6 @@ public class AccountInfoPage extends AppCompatActivity {
     private Button changeUser, changePass, deleteAccount;
     private TextView logout, returnFromAccount, userName;
     private FirebaseAuth mAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Override
@@ -57,7 +56,6 @@ public class AccountInfoPage extends AppCompatActivity {
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteUser();
                 Intent intent = new Intent(AccountInfoPage.this, DeleteAccountPage.class);
                 startActivity(intent);
             }
@@ -97,23 +95,6 @@ public class AccountInfoPage extends AppCompatActivity {
             }
         });
 
-    }
-    private void deleteUser() {
-        currentUser.delete();
-        db.collection("users")
-                .whereEqualTo("user_id", currentUserID)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        // Get the reference to the document
-                        DocumentReference userRef = documentSnapshot.getReference();
-                        // Delete the user document
-                        userRef.delete()
-                                .addOnSuccessListener(aVoid -> Log.d(TAG, "User document deleted successfully"))
-                                .addOnFailureListener(e -> Log.w(TAG, "Error deleting user document", e));
-                    }
-                })
-                .addOnFailureListener(e -> Log.w(TAG, "Error searching for user by user ID", e));
     }
 
 }
