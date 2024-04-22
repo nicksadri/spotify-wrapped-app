@@ -70,13 +70,14 @@ public class TopArtistPage extends AppCompatActivity {
     private List<String> topArtistsRecommend;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private static ArrayList<String> previousTopArtists;
+    private static final ArrayList<String> previousTopArtists = new ArrayList<>();;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.top_artist_page);
+
 
         artistNext = findViewById(R.id.artistsNextButton);
 
@@ -167,7 +168,6 @@ public class TopArtistPage extends AppCompatActivity {
 
     public List<String> getArtistsAsList() {
         List<String> topArtistsList = new ArrayList<>();
-        previousTopArtists = new ArrayList<>();
 
         if (MainActivity.mAccessToken == null) {
             Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
@@ -219,6 +219,7 @@ public class TopArtistPage extends AppCompatActivity {
                         setTextAsync(topArtistsList.get(0), artist1Name);
                         previousTopArtists.add(topArtistsList.get(0));
                     }
+                    Log.d("TopArtistsLength", "" + previousTopArtists.size());
                     if (topArtistsList.get(1).length() > 15) {
                         setTextAsync(topArtistsList.get(1).substring(0,14), artist2Name);
                     } else {

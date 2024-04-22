@@ -26,12 +26,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public RecyclerViewAdapter(Context context, ArrayList<WrappedClass> actualList) {
         this.context = context;
-        this.actualList = PreviousWrappedPage.getMasterList();
+        this.actualList = actualList;
         for (int i = 0; i < TopArtistPage.getPreviousTopArtists().size(); i++) {
             WrappedClass wrapped = new WrappedClass(TopArtistPage.getPreviousTopArtists().get(i), TopTrackPage.getPreviousTopTracks().get(i));
             actualList.add(wrapped);
         }
-
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,13 +61,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.recycler_view_row_layout, viewGroup, false);
 
+
         return new ViewHolder(view);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
@@ -78,6 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.getTopTrack().setText(trackText);
 
     }
+
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override

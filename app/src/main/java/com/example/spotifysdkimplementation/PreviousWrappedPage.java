@@ -26,7 +26,7 @@ public class PreviousWrappedPage extends AppCompatActivity {
         return masterList;
     }
 
-    private static ArrayList<WrappedClass> masterList = new ArrayList<>();
+    private static ArrayList<WrappedClass> masterList;
     private RecyclerView recyclerView;
     private static RecyclerViewAdapter adapter;
 
@@ -35,6 +35,7 @@ public class PreviousWrappedPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.previous_wrapped_page);
 
+        masterList = new ArrayList<>();
         recyclerView = findViewById(R.id.wrappedRecyclerView);
         adapter = new RecyclerViewAdapter(this, masterList);
 

@@ -69,7 +69,7 @@ public class TopTrackPage extends AppCompatActivity {
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5;
     private static List<String> topTracks;
 
-    private static ArrayList<String> previousTopTracks;
+    private static final ArrayList<String> previousTopTracks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +119,6 @@ public class TopTrackPage extends AppCompatActivity {
 
     public List<String> getTrackAsList() {
         List<String> topTracksList = new ArrayList<>();
-        previousTopTracks = new ArrayList<>();
 
         if (MainActivity.mAccessToken == null) {
             Toast.makeText(this, "You need to get an access token first!", Toast.LENGTH_SHORT).show();
