@@ -24,6 +24,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static ArrayList<WrappedClass> actualList;
 
+    private int count = 0;
+
     public RecyclerViewAdapter(Context context, ArrayList<WrappedClass> actualList) {
         this.context = context;
         this.actualList = actualList;
@@ -123,16 +125,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        String artistText = actualList.get(position).getTopArtist();
-        String trackText = actualList.get(position).getTopTrack();
-        String artistText2 = actualList.get(position + 1).getTopArtist();
-        String trackText2 = actualList.get(position + 1).getTopTrack();
-        String artistText3 = actualList.get(position + 2).getTopArtist();
-        String trackText3 = actualList.get(position + 2).getTopTrack();
-        String artistText4 = actualList.get(position + 3).getTopArtist();
-        String trackText4 = actualList.get(position + 3).getTopTrack();
-        String artistText5 = actualList.get(position + 4).getTopArtist();
-        String trackText5 = actualList.get(position + 4).getTopTrack();
+        String artistText = actualList.get(position - count).getTopArtist();
+        String trackText = actualList.get(position - count).getTopTrack();
+        String artistText2 = actualList.get(position + 1 - count).getTopArtist();
+        String trackText2 = actualList.get(position + 1 - count).getTopTrack();
+        String artistText3 = actualList.get(position + 2 - count).getTopArtist();
+        String trackText3 = actualList.get(position + 2 - count).getTopTrack();
+        String artistText4 = actualList.get(position + 3 - count).getTopArtist();
+        String trackText4 = actualList.get(position + 3 - count).getTopTrack();
+        String artistText5 = actualList.get(position + 4 - count).getTopArtist();
+        String trackText5 = actualList.get(position + 4 - count).getTopTrack();
         viewHolder.getTopArtist().setText(artistText);
         viewHolder.getTopTrack().setText(trackText);
         viewHolder.getTopArtist2().setText(artistText2);
@@ -144,6 +146,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.getTopArtist5().setText(artistText5);
         viewHolder.getTopTrack5().setText(trackText5);
 
+        count++;
+        if (count == 5) {
+            count = 0;
+        }
     }
 
 
