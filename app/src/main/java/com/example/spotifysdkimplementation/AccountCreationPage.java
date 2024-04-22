@@ -109,8 +109,10 @@ public class AccountCreationPage extends AppCompatActivity {
                                             getCode();
                                         })
                                 .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-                        Toast.makeText(AccountCreationPage.this, "Signed Up.",
+                        Toast.makeText(AccountCreationPage.this, "Signed Up. Please Verify Email",
                                 Toast.LENGTH_SHORT).show();
+                        mAuth.getCurrentUser().sendEmailVerification();
+
 
                     } else {
                         // If sign up fails, display a message to the user.

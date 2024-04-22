@@ -42,6 +42,7 @@ public class ChangeUsernamePage extends AppCompatActivity {
         newUser = findViewById(R.id.new_username);
         confUser = findViewById(R.id.confirm_username);
 
+        mAuth = FirebaseAuth.getInstance();
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
