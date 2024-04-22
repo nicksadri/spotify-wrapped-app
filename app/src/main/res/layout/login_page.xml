@@ -74,18 +74,6 @@
         />
 
     <TextView
-        android:id="@+id/forgot_your"
-        android:layout_width="178dp"
-        android:layout_height="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="303dp"
-        android:text="@string/forgot_your"
-        android:textAppearance="@style/forgot_your"
-        android:gravity="top"
-        />
-
-    <TextView
         android:id="@+id/don_t_have_"
         android:layout_width="273dp"
         android:layout_height="19dp"
