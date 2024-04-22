@@ -70,6 +70,10 @@ public class TopTrackPage extends AppCompatActivity {
     private static List<String> topTracks;
 
     private static final ArrayList<String> previousTopTracks = new ArrayList<>();
+    private static final ArrayList<String> previousTopTracks2 = new ArrayList<>();
+    private static final ArrayList<String> previousTopTracks3 = new ArrayList<>();
+    private static final ArrayList<String> previousTopTracks4 = new ArrayList<>();
+    private static final ArrayList<String> previousTopTracks5 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,23 +174,31 @@ public class TopTrackPage extends AppCompatActivity {
                     }
                     if (topTracksList.get(1).length() > 15) {
                         setTextAsync(topTracksList.get(1).substring(0, 15), track2Name);
+                        previousTopTracks2.add(topTracksList.get(1).substring(0, 15));
                     } else {
                         setTextAsync(topTracksList.get(1), track2Name);
+                        previousTopTracks2.add(topTracksList.get(1));
                     }
                     if (topTracksList.get(2).length() > 15) {
                         setTextAsync(topTracksList.get(2).substring(0, 15), track3Name);
+                        previousTopTracks3.add(topTracksList.get(2).substring(0, 15));
                     } else {
                         setTextAsync(topTracksList.get(2), track3Name);
+                        previousTopTracks3.add(topTracksList.get(2));
                     }
                     if (topTracksList.get(3).length() > 15) {
                         setTextAsync(topTracksList.get(3).substring(0, 15), track4Name);
+                        previousTopTracks4.add(topTracksList.get(3).substring(0, 15));
                     } else {
                         setTextAsync(topTracksList.get(3), track4Name);
+                        previousTopTracks4.add(topTracksList.get(3));
                     }
                     if (topTracksList.get(4).length() > 15) {
                         setTextAsync(topTracksList.get(4).substring(0, 15), track5Name);
+                        previousTopTracks5.add(topTracksList.get(4).substring(0, 15));
                     } else {
                         setTextAsync(topTracksList.get(4), track5Name);
+                        previousTopTracks5.add(topTracksList.get(4));
                     }
 
 //                    setTextAsync(topTracksList.get(1), track2Name);
@@ -342,6 +354,18 @@ public class TopTrackPage extends AppCompatActivity {
 
     public static ArrayList<String> getPreviousTopTracks() {
         return previousTopTracks;
+    }
+    public static ArrayList<String> getPreviousTopTracks2() {
+        return previousTopTracks2;
+    }
+    public static ArrayList<String> getPreviousTopTracks3() {
+        return previousTopTracks3;
+    }
+    public static ArrayList<String> getPreviousTopTracks4() {
+        return previousTopTracks4;
+    }
+    public static ArrayList<String> getPreviousTopTracks5() {
+        return previousTopTracks5;
     }
 
 }

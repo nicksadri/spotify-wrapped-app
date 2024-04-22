@@ -70,7 +70,11 @@ public class TopArtistPage extends AppCompatActivity {
     private List<String> topArtistsRecommend;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private static final ArrayList<String> previousTopArtists = new ArrayList<>();;
+    private static final ArrayList<String> previousTopArtists = new ArrayList<>();
+    private static final ArrayList<String> previousTopArtists2 = new ArrayList<>();
+    private static final ArrayList<String> previousTopArtists3 = new ArrayList<>();
+    private static final ArrayList<String> previousTopArtists4 = new ArrayList<>();
+    private static final ArrayList<String> previousTopArtists5 = new ArrayList<>();
 
 
     @Override
@@ -222,23 +226,31 @@ public class TopArtistPage extends AppCompatActivity {
                     Log.d("TopArtistsLength", "" + previousTopArtists.size());
                     if (topArtistsList.get(1).length() > 15) {
                         setTextAsync(topArtistsList.get(1).substring(0,14), artist2Name);
+                        previousTopArtists2.add(topArtistsList.get(1).substring(0,14));
                     } else {
                         setTextAsync(topArtistsList.get(1), artist2Name);
+                        previousTopArtists2.add(topArtistsList.get(1));
                     }
                     if (topArtistsList.get(2).length() > 15) {
                         setTextAsync(topArtistsList.get(2).substring(0,14), artist3Name);
+                        previousTopArtists3.add(topArtistsList.get(2).substring(0,14));
                     } else {
                         setTextAsync(topArtistsList.get(2), artist3Name);
+                        previousTopArtists3.add(topArtistsList.get(2));
                     }
                     if (topArtistsList.get(3).length() > 15) {
                         setTextAsync(topArtistsList.get(3).substring(0,14), artist4Name);
+                        previousTopArtists4.add(topArtistsList.get(3).substring(0,14));
                     } else {
                         setTextAsync(topArtistsList.get(3), artist4Name);
+                        previousTopArtists4.add(topArtistsList.get(3));
                     }
                     if (topArtistsList.get(4).length() > 15) {
                         setTextAsync(topArtistsList.get(4).substring(0,14), artist5Name);
+                        previousTopArtists5.add(topArtistsList.get(4).substring(0,14));
                     } else {
                         setTextAsync(topArtistsList.get(4), artist5Name);
+                        previousTopArtists5.add(topArtistsList.get(4));
                     }
                     setImageAsync(images.get(0), imageView1);
                     setImageAsync(images.get(1), imageView2);
@@ -437,6 +449,18 @@ public class TopArtistPage extends AppCompatActivity {
 
     public static ArrayList<String> getPreviousTopArtists() {
         return previousTopArtists;
+    }
+    public static ArrayList<String> getPreviousTopArtists2() {
+        return previousTopArtists2;
+    }
+    public static ArrayList<String> getPreviousTopArtists3() {
+        return previousTopArtists3;
+    }
+    public static ArrayList<String> getPreviousTopArtists4() {
+        return previousTopArtists4;
+    }
+    public static ArrayList<String> getPreviousTopArtists5() {
+        return previousTopArtists5;
     }
 
 }
