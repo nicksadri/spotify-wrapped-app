@@ -51,8 +51,8 @@ public class AccountInfoPage extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         returnFromAccount = findViewById(R.id.returnToMainButton);
         userName = findViewById(R.id.username);
-        int pos = mAuth.getCurrentUser().getEmail().indexOf('@');
-        userName.setText(mAuth.getCurrentUser().getEmail().substring(0,pos));
+//        int pos = mAuth.getCurrentUser().getEmail().indexOf('@');
+        userName.setText(mAuth.getCurrentUser().getEmail());
 
         deleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
