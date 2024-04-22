@@ -51,28 +51,16 @@
         android:background="@drawable/spotifylogo" />
 
     <TextView
-        android:id="@+id/george_burd"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="81dp"
-        android:layout_marginTop="302dp"
+        android:layout_marginLeft="79dp"
+        android:layout_marginTop="340dp"
         android:gravity="center_horizontal|top"
         android:text="@string/george_burd"
         android:textAppearance="@style/george_burd" />
-
-    <TextView
-        android:id="@+id/username_gb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="353dp"
-        android:gravity="center_horizontal|top"
-        android:text="@string/username_gb"
-        android:textAppearance="@style/username_gb" />
 
     <Button
         android:id="@+id/change_username_button"
