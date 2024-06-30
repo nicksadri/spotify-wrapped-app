@@ -1,5 +1,5 @@
 # :headphones: Spotify Wrapped App :headphones:
-Some people eagerly await December in hopes of snow, presents, and time with family. Spotify users, however, look forward to December for one reason only: to see their [Spotify Wrapped](https://newsroom.spotify.com/2023-wrapped/).
+Millions of music listeners eagerly await December each year to see their new [Spotify Wrapped](https://newsroom.spotify.com/2023-wrapped/).
 
 Luckily for Spotify users, our team has developed a year-round Spotify Wrapped application using Spotify's API. In addition to summarizing top artists and tracks, we also added several novel features which are elaborated upon below.
 
